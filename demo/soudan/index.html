@@ -4,64 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>職員のLINE相談窓口｜デモ</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🏥</text></svg>">
-<link rel="stylesheet" href="../assets/demo.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<title>職員の相談窓口｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css?v=2">
 <style>
-.qs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
-.q{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:8px 15px;font-size:13.5px;
-  cursor:pointer;transition:.13s;-webkit-tap-highlight-color:transparent;line-height:1.5}
+.qs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.q{background:#fff;border:2px solid var(--line);border-radius:99px;padding:10px 17px;font-size:14.5px;
+  font-weight:700;cursor:pointer;transition:.13s;-webkit-tap-highlight-color:transparent}
 .q:hover{border-color:var(--ac);background:var(--acs);color:var(--ac2)}
-.tabs{display:flex;gap:7px;margin-bottom:14px}
-.tab{flex:1;background:var(--head);border:1.5px solid var(--line);border-radius:10px;padding:11px;
-  font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:.13s}
-.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-.an{background:#fff;border:1px solid var(--line);border-left:3px solid var(--wn);border-radius:9px;
-  padding:12px 14px;margin-bottom:9px;font-size:14px;line-height:1.75}
-.an .m{font-size:11.5px;color:var(--mute);margin-top:6px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
-.law{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line2);font-size:13.5px}
-.law:last-child{border-bottom:none}
-.law .ck{color:var(--gd);font-weight:800;flex:none}
-.law b{display:block;font-size:14px}
-.law span{color:var(--mute);font-size:12.5px;line-height:1.6}
+.an{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--line);
+  border-radius:13px;padding:14px 16px;margin-bottom:9px}
+.an .t{flex:1;font-size:15.5px;line-height:1.7;font-weight:600}
+.an .t small{display:block;font-size:12.5px;color:var(--mute);margin-top:4px}
+.an.dg{border-color:#e0a49e;background:var(--dgs)}
+.an.wn{border-color:#e8cdb4;background:var(--wns)}
+.an.gd{border-color:#bcdccb;background:var(--gds)}
 </style>
 </head>
 <body>
 
 <header class="appbar">
   <div class="in">
-    <a class="back" href="../">← デモ一覧</a>
-    <h1>職員のLINE相談窓口</h1>
+    <a class="back" href="../">← もどる</a>
+    <h1>職員の相談窓口</h1>
     <span class="tagdemo">DEMO</span>
-    <p class="sub">就業規則はAIが参照元つきで即答。言いづらい相談は匿名のまま届きます</p>
   </div>
 </header>
 
 <div class="wrap">
 
-  <div class="lead">
-    <b>辞める理由は、たいてい辞めてから分かります。</b>
-    面談を増やしても、面と向かっては言えないことがあります。
-    いつも使っているLINEから、<b>アプリを入れずに、匿名のまま</b>相談できる受け皿をつくる、という考え方です。
-    <span class="try">▼ 下の質問ボタンを押すか、自由に入力してみてください。</span>
-  </div>
-
   <div class="cols c23">
 
     <div class="panel">
-      <h2>① 職員のスマホ<span class="r">アプリ不要</span></h2>
+      <h2><img class="ic sm" src="../assets/icon/chat.png" alt="">職員のスマホ</h2>
       <div class="pad">
-        <div class="tabs">
-          <div class="tab on" data-m="rule">就業規則を聞く</div>
-          <div class="tab" data-m="talk">匿名で相談する</div>
+        <div class="itabs">
+          <div class="itab on" data-m="rule"><img class="ic" src="../assets/icon/paper.png" alt=""><span class="t">きまりを聞く</span></div>
+          <div class="itab" data-m="talk"><img class="ic" src="../assets/icon/lock.png" alt=""><span class="t">こっそり相談</span></div>
         </div>
         <div class="qs" id="qs"></div>
         <div class="phone">
           <div class="scr">
-            <div class="bar" id="pbar">🐱　職員サポート窓口</div>
+            <div class="bar" id="pbar">職員サポート</div>
             <div class="body" id="body"></div>
             <div class="inp">
-              <input type="text" id="inp" placeholder="メッセージを入力">
+              <input type="text" id="inp" placeholder="入力する">
               <button id="go">➤</button>
             </div>
           </div>
@@ -71,84 +58,71 @@
 
     <div>
       <div class="panel">
-        <h2>② 管理者側の画面<span class="r">誰が書いたかは分かりません</span></h2>
+        <h2><img class="ic sm" src="../assets/icon/building.png" alt="">上の人が見る画面</h2>
         <div class="pad">
-          <div class="kpis" style="margin-bottom:14px">
-            <div class="kpi"><div class="n">31<small>件</small></div><div class="l">今月の相談</div></div>
-            <div class="kpi wn"><div class="n">4<small>件</small></div><div class="l">要対応</div></div>
-            <div class="kpi gd"><div class="n">73<small>%</small></div><div class="l">規則の質問は自己解決</div></div>
+          <div class="irow gd" style="margin-bottom:12px">
+            <img class="ic" src="../assets/icon/lock.png" alt="">
+            <span class="t"><b>誰が書いたかは分かりません</b></span>
           </div>
-          <div class="an">夜勤の人数が足りず、休憩が取れない日が続いています。誰かが倒れる前に見直してほしいです。
-            <div class="m"><span class="b dg">要対応</span>3階／夜勤帯　8月18日</div></div>
-          <div class="an">新しく入った職員への指導が特定の人に偏っています。負担が大きそうで見ていて心配です。
-            <div class="m"><span class="b wn">確認中</span>2階　8月15日</div></div>
-          <div class="an" style="border-left-color:var(--gd)">記録アプリの入力が分かりやすくなって助かっています。
-            <div class="m"><span class="b gd">good</span>全体　8月12日</div></div>
-          <div class="note w" style="margin-bottom:0">
-            <b>「休憩が取れない」は、面談では出てきにくい種類の声です。</b>
-            匿名だから出てきます。ここに早く気づけるかどうかが、離職を1人止められるかどうかの差になります。
+          <div class="an dg"><img class="ic sm" src="../assets/icon/alert.png" alt="">
+            <span class="t">夜勤の人数が足りず、休憩が取れない日が続いています。
+            <small>3階・夜勤帯／8月18日</small></span></div>
+          <div class="an wn"><img class="ic sm" src="../assets/icon/clock.png" alt="">
+            <span class="t">新人への指導が特定の人に偏っています。
+            <small>2階／8月15日</small></span></div>
+          <div class="an gd" style="margin-bottom:0"><img class="ic sm" src="../assets/icon/check.png" alt="">
+            <span class="t">記録アプリが分かりやすくなって助かっています。
+            <small>全体／8月12日</small></span></div>
+          <div class="irow wn" style="margin:14px 0 0">
+            <img class="ic" src="../assets/icon/alert.png" alt="">
+            <span class="t">「休憩が取れない」は<b>面談では出てこない声</b>です</span>
           </div>
         </div>
       </div>
 
       <div class="panel">
-        <h2>③ 同時に満たせる法令</h2>
+        <h2><img class="ic sm" src="../assets/icon/check.png" alt="">同時に満たせる法律</h2>
         <div class="pad">
-          <div class="law"><span class="ck">✓</span><div><b>パワハラ防止法</b><span>ハラスメント防止措置（全企業が義務）</span></div></div>
-          <div class="law"><span class="ck">✓</span><div><b>公益通報者保護法</b><span>内部通報体制の整備</span></div></div>
-          <div class="law"><span class="ck">✓</span><div><b>労働基準法</b><span>就業規則の周知（従業員10人以上は義務）</span></div></div>
-          <div class="law"><span class="ck">✓</span><div><b>労働安全衛生法</b><span>ストレスチェック（従業員50人以上は義務）</span></div></div>
-          <div class="law"><span class="ck">✓</span><div><b>育児・介護休業法</b><span>相談窓口の設置・制度の周知</span></div></div>
-          <p class="fine">※制度の要件は改正により変わります。導入時に最新の内容を確認します。</p>
+          <div class="irow gd"><img class="ic sm" src="../assets/icon/check.png" alt=""><span class="t">パワハラ防止法</span></div>
+          <div class="irow gd"><img class="ic sm" src="../assets/icon/check.png" alt=""><span class="t">公益通報者保護法</span></div>
+          <div class="irow gd"><img class="ic sm" src="../assets/icon/check.png" alt=""><span class="t">労働基準法（規則の周知）</span></div>
+          <div class="irow gd"><img class="ic sm" src="../assets/icon/check.png" alt=""><span class="t">労働安全衛生法</span></div>
+          <div class="irow gd" style="margin-bottom:0"><img class="ic sm" src="../assets/icon/check.png" alt=""><span class="t">育児・介護休業法</span></div>
         </div>
       </div>
     </div>
 
   </div>
 
-  <div class="panel">
-    <h2>外国人スタッフにも、そのまま使えます</h2>
-    <div class="pad">
-      <p style="margin-top:0">介護の現場では技能実習生や特定技能の方が増えています。
-      <strong>母国語で質問して、管理者には日本語で届く</strong>形にできるので、
-      「説明したつもりが伝わっていなかった」というズレが減ります。</p>
-      <div class="cols c2">
-        <div class="an" style="border-left-color:var(--ac)">Xin chào, tôi muốn hỏi về ngày nghỉ có lương.
-          <div class="m">ベトナム語で質問</div></div>
-        <div class="an" style="border-left-color:var(--gd)">（翻訳）こんにちは。有給休暇について聞きたいです。
-          <div class="m"><span class="b gd">管理者にはこう見えます</span></div></div>
-      </div>
-    </div>
+  <div class="irow gd" style="margin-bottom:0">
+    <img class="ic" src="../assets/icon/family.png" alt="">
+    <span class="t">外国人スタッフは<b>母国語で質問</b>できます。上の人には日本語で届きます。</span>
   </div>
 
 </div>
 
 <footer class="demo">
-  デモ用のサンプルです。回答内容・相談内容・数値はすべて架空のものです。<br>
-  実際は、その施設の就業規則・各種規程を読み込ませたうえで回答します。
+  デモ用のサンプルです。回答・相談の内容はすべて架空のものです。<br>
+  画面の動きは実物ですが、回答はあらかじめ用意したものです。
 </footer>
 
 <script>
 const QA = {
-  '有給の申請はどうすれば？':{
-    a:'有給休暇の申請は、原則として<b>取得希望日の3日前まで</b>にシフト管理者へ申し出ることになっています。\n繁忙期は調整をお願いする場合がありますが、時季変更をお願いするのは事業の正常な運営を妨げる場合に限られます。\n\n現在の残日数は <b>12日</b> です。このままLINEで申請もできます。',
-    s:'就業規則｜第4章 第26条（年次有給休暇）'},
-  '祖母が亡くなりました。忌引は？':{
-    a:'このたびはご愁傷さまです。\n慶弔休暇の規定では、<b>祖父母の場合は3日間</b>の忌引休暇が付与されます。\n\n手続きはシフト管理者へご連絡ください。証明書類の提出は復帰後で差し支えありません。',
-    s:'就業規則｜第5章 第24条（慶弔休暇）'},
-  '夜勤明けの休みの決まりは？':{
-    a:'夜勤明けの日は<b>勤務時間に含まれ、その後は休息時間</b>として扱います。\n夜勤明けの当日に日勤を入れることはできません。\n\nまた、次の勤務までは<b>11時間以上の間隔</b>を空ける決まりになっています。',
-    s:'就業規則｜第3章 第15条（勤務時間）／夜勤取扱要領'},
-  '資格を取ったら手当は増える？':{
-    a:'はい。資格手当の対象は次のとおりです。\n\n・介護福祉士　<b>月15,000円</b>\n・実務者研修修了　月8,000円\n・介護支援専門員　月20,000円\n\n資格証の写しを提出いただいた<b>翌月分から</b>支給されます。',
-    s:'給与規程｜第7条（資格手当）'},
-  '腰を痛めました。労災になる？':{
-    a:'業務中の移乗介助などが原因の腰痛は、<b>労災保険の対象になる可能性</b>があります。\n\nまずは受診し、医療機関で「仕事中の作業が原因」とお伝えください。費用は原則として自己負担なしで扱えます。\n\n手続きは施設側で進めますので、シフト管理者と事務へご連絡ください。',
-    s:'就業規則｜第8章 第41条（業務災害）／労働者災害補償保険法'}
-};
-const TALK = {
-  first:'こんにちは。ここでのやり取りは<b>匿名</b>です。\nあなたが誰かは、施設側には分かりません。\n\n気になっていることを、そのまま書いていただいて大丈夫です。',
-  reply:'話してくださってありがとうございます。\nそれはお辛かったですね。ひとりで抱えていたのだと思います。\n\nこの内容を、<b>あなたが誰かは伏せたまま</b>上層部へ届けることができます。届けますか？\n\n※すぐに動かしたくない場合は、このまま話を聞くだけにもできます。'
+  '有給はどう取る？':{
+    a:'有給は、<b>3日前まで</b>にシフト担当へ伝えてください。\n\nいまの残りは <b>12日</b> です。\nこのままLINEで申し込めます。',
+    s:'就業規則 第26条'},
+  '祖母が亡くなった':{
+    a:'このたびはご愁傷さまです。\n祖父母の場合は <b>3日間</b> のお休みが取れます。\n\nシフト担当へご連絡ください。\n書類はあとで大丈夫です。',
+    s:'就業規則 第24条'},
+  '夜勤明けは休み？':{
+    a:'夜勤明けの日は<b>勤務に含まれます</b>。\nその日に日勤は入れられません。\n\n次の勤務まで <b>11時間以上</b> あけます。',
+    s:'就業規則 第15条'},
+  '資格を取ったら？':{
+    a:'手当がつきます。\n\n・介護福祉士　<b>月15,000円</b>\n・実務者研修　月8,000円\n・ケアマネ　月20,000円\n\n資格証を出した<b>翌月から</b>です。',
+    s:'給与規程 第7条'},
+  '腰を痛めた':{
+    a:'仕事が原因の腰痛は、<b>労災になることがあります</b>。\n\nまず受診して、「仕事中の作業が原因」と伝えてください。\n手続きは施設で進めます。',
+    s:'就業規則 第41条'}
 };
 const el = id => document.getElementById(id);
 let mode = 'rule';
@@ -156,25 +130,22 @@ let mode = 'rule';
 function add(who, html, src){
   const d = document.createElement('div');
   d.className = 'msg ' + who + ' fu';
-  d.innerHTML = html.replace(/\n/g,'<br>') + (src ? `<span class="src">📄 参照元：${src}</span>` : '');
+  d.innerHTML = html.replace(/\n/g,'<br>') + (src ? `<span class="src">📄 ${src}</span>` : '');
   el('body').appendChild(d);
   el('body').scrollTop = el('body').scrollHeight;
 }
 function reset(){
   el('body').innerHTML = '';
   if (mode === 'rule'){
-    el('pbar').innerHTML = '🐱　職員サポート窓口';
-    add('them','こんにちは。就業規則や手続きについて、なんでも聞いてください。\n<b>参照元つき</b>でお答えします。');
+    el('pbar').textContent = '職員サポート';
+    add('them','きまりのことなら、なんでも聞いてください。\n<b>どこに書いてあるか</b>もお答えします。');
     el('qs').innerHTML = Object.keys(QA).map(q=>`<span class="q">${q}</span>`).join('');
   } else {
-    el('pbar').innerHTML = '🔒　匿名相談（誰かは分かりません）';
-    add('them', TALK.first);
-    el('qs').innerHTML = ['最近ずっと眠れません','夜勤の人数が足りません','先輩の言い方がきついです']
+    el('pbar').textContent = '🔒 こっそり相談';
+    add('them','ここでのやりとりは<b>匿名</b>です。\nあなたが誰かは分かりません。\n\n思っていることを、そのまま書いて大丈夫です。');
+    el('qs').innerHTML = ['ずっと眠れません','夜勤の人数が足りません','先輩の言い方がきついです']
       .map(q=>`<span class="q">${q}</span>`).join('');
   }
-  bindQ();
-}
-function bindQ(){
   document.querySelectorAll('.q').forEach(q => q.onclick = () => ask(q.textContent));
 }
 function ask(t){
@@ -183,26 +154,26 @@ function ask(t){
     if (mode === 'rule'){
       const hit = QA[t];
       if (hit) add('them', hit.a, hit.s);
-      else add('them','ご質問ありがとうございます。\n就業規則の該当箇所を探しましたが、はっきりした記載が見つかりませんでした。\n\n確実なところは、シフト管理者か事務へご確認ください。\n\n<b>※分からないことは「分からない」と答えます。</b>あいまいな回答で現場を混乱させないためです。');
+      else add('them','見つかりませんでした。\nシフト担当か事務にお聞きください。\n\n<b>分からないことは、分からないとお答えします。</b>');
     } else {
-      add('them', TALK.reply);
+      add('them','話してくださって、ありがとうございます。\nおつらかったですね。\n\nこの内容を、<b>誰が書いたかは伏せたまま</b>上の人へ届けられます。');
       setTimeout(()=>{
         const d = document.createElement('div');
         d.className = 'msg them fu';
-        d.innerHTML = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px">' +
-          '<button class="btn sm" style="font-size:12px;padding:6px 12px" onclick="sent()">匿名で届ける</button>' +
-          '<button class="btn o sm" style="font-size:12px;padding:6px 12px" onclick="justtalk()">話を聞くだけ</button></div>';
+        d.innerHTML = '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+          '<button class="q" style="font-size:13px;padding:7px 14px" onclick="sent()">届ける</button>' +
+          '<button class="q" style="font-size:13px;padding:7px 14px" onclick="justtalk()">聞くだけでいい</button></div>';
         el('body').appendChild(d);
         el('body').scrollTop = el('body').scrollHeight;
       }, 800);
     }
-  }, 620);
+  }, 600);
 }
-function sent(){ add('them','届けました。\n<b>誰が書いたかは伏せたまま</b>、内容だけが上層部の画面に入ります。\n\n右の「管理者側の画面」で、どう見えるか確認できます。'); }
-function justtalk(){ add('them','わかりました。ここだけの話にしておきます。\n\nまた話したくなったら、いつでも書いてください。24時間開いています。'); }
+function sent(){ add('them','届けました。\n<b>名前は伏せたまま</b>、内容だけが届いています。\n\n右の画面で、どう見えるか確認できます。'); }
+function justtalk(){ add('them','わかりました。ここだけの話にしておきます。\n\nまた話したくなったら、いつでもどうぞ。'); }
 
-document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+document.querySelectorAll('.itab').forEach(t => t.onclick = () => {
+  document.querySelectorAll('.itab').forEach(x=>x.classList.remove('on'));
   t.classList.add('on'); mode = t.dataset.m; reset();
 });
 el('go').onclick = () => { const v = el('inp').value.trim(); if(!v) return; el('inp').value=''; ask(v); };

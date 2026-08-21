@@ -130,3 +130,78 @@ label.fl{display:block;font-size:12.5px;font-weight:700;color:var(--soft);margin
 .spin{display:inline-block;width:15px;height:15px;border:2.5px solid var(--acs);
   border-top-color:var(--ac);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
+
+/* ===================================================================
+   初心者向け シンプルUI（アイコン中心・文字少なめ）
+   =================================================================== */
+
+/* --- アイコン --- */
+.ic{width:44px;height:44px;border-radius:12px;flex:none;display:block;object-fit:cover}
+.ic.sm{width:30px;height:30px;border-radius:8px}
+.ic.lg{width:64px;height:64px;border-radius:16px}
+.ic.xl{width:88px;height:88px;border-radius:22px}
+
+/* --- 大きな操作ボタン（初心者向け・タップしやすい） --- */
+.act{display:flex;align-items:center;gap:16px;width:100%;background:#fff;
+  border:2px solid var(--line);border-radius:16px;padding:16px 20px;cursor:pointer;
+  transition:.14s;text-align:left;-webkit-tap-highlight-color:transparent;font-family:inherit}
+.act:hover{border-color:var(--ac);background:var(--acs);transform:translateY(-2px)}
+.act:active{transform:translateY(0)}
+.act .t{font-size:20px;font-weight:800;line-height:1.4;color:var(--ink)}
+.act .s{font-size:13px;color:var(--mute);line-height:1.5;margin-top:2px}
+.act .arw{margin-left:auto;font-size:22px;color:var(--ac);flex:none}
+.act:disabled{opacity:.4;cursor:default;transform:none}
+.act.go{border-color:var(--wn);background:var(--wns)}
+.act.go .arw{color:var(--wn)}
+.act.go:hover{border-color:var(--wn);background:#fbe6d3}
+
+/* --- アイコン＋短い言葉のカード --- */
+.icards{display:grid;gap:12px}
+@media(min-width:560px){.icards.c2{grid-template-columns:1fr 1fr}
+  .icards.c3{grid-template-columns:repeat(3,1fr)}
+  .icards.c4{grid-template-columns:repeat(4,1fr)}}
+.icard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px}
+.icard .t{font-size:15px;font-weight:800;line-height:1.45}
+.icard .v{font-size:26px;font-weight:800;line-height:1.15;color:var(--ac2);
+  font-family:"Helvetica Neue",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.icard .v small{font-size:14px}
+.icard.wn .v{color:var(--wn)} .icard.dg .v{color:var(--dg)} .icard.gd .v{color:var(--gd)}
+
+/* --- 横並びのアイコン行（説明の代わり） --- */
+.irow{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.irow .t{font-size:16px;font-weight:700;line-height:1.55;flex:1;min-width:0}
+.irow .t b{font-weight:800}
+.irow.gd{background:var(--gds);border-color:#bcdccb}
+.irow.wn{background:var(--wns);border-color:#e8cdb4}
+.irow.dg{background:var(--dgs);border-color:#e8c4c1}
+
+/* --- 3ステップの流れ（矢印つき） --- */
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0}
+.flow .st{display:flex;flex-direction:column;align-items:center;gap:7px;min-width:88px}
+.flow .st .t{font-size:13.5px;font-weight:700;text-align:center;line-height:1.45}
+.flow .ar{font-size:22px;color:var(--mute);flex:none}
+
+/* --- ひとこと見出し（文字を減らす） --- */
+.oneline{display:flex;align-items:center;gap:14px;margin:0 0 18px}
+.oneline .t{font-size:clamp(17px,2.6vw,21px);font-weight:800;line-height:1.5}
+.oneline .t small{display:block;font-size:13.5px;font-weight:600;color:var(--mute);margin-top:3px}
+
+/* --- 大きな結果表示 --- */
+.big{display:flex;align-items:center;gap:18px;background:var(--gds);border:2px solid #bcdccb;
+  border-radius:16px;padding:20px 22px;margin:16px 0}
+.big .n{font-size:clamp(28px,5vw,38px);font-weight:800;color:#1f5c3f;line-height:1.1;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.big .l{font-size:14px;color:#2f6f4f;font-weight:700;margin-top:2px}
+.big.wn{background:var(--wns);border-color:#e8cdb4}
+.big.wn .n{color:#8a3f16} .big.wn .l{color:var(--wn)}
+
+/* --- タブ（アイコン付き） --- */
+.itabs{display:flex;gap:8px;margin-bottom:16px}
+.itab{flex:1;background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px 10px;
+  cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;transition:.14s;
+  font-family:inherit;-webkit-tap-highlight-color:transparent}
+.itab .t{font-size:14px;font-weight:800;line-height:1.4;color:var(--ink)}
+.itab.on{border-color:var(--ac);background:var(--acs)}
+.itab:hover{border-color:var(--ac)}

@@ -4,230 +4,175 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>会議・カンファレンス議事録｜デモ</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🏥</text></svg>">
-<link rel="stylesheet" href="../assets/demo.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<title>会議の議事録｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css?v=2">
 <style>
-.rec{background:#12222f;border-radius:14px;padding:26px 22px;text-align:center;color:#fff}
-.wave{display:flex;align-items:center;justify-content:center;gap:3px;height:56px;margin:14px 0}
+.rec{background:#12222f;border-radius:18px;padding:26px 22px;text-align:center;color:#fff}
+.wave{display:flex;align-items:center;justify-content:center;gap:3px;height:52px;margin:14px 0}
 .wave i{width:4px;background:#4da3e0;border-radius:2px;height:6px;transition:height .12s}
-.rec .t{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;
-  font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.03em}
-.rec .st{font-size:12.5px;opacity:.7;margin-top:3px}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#e0503f;margin-right:7px;vertical-align:1px}
-.local{background:var(--gds);border:1.5px solid #bcdccb;border-radius:11px;padding:13px 16px;
-  font-size:13.5px;line-height:1.75;color:#255a40;margin-top:14px;display:flex;gap:11px;align-items:flex-start}
-.local .ic{font-size:19px;line-height:1;flex:none;margin-top:2px}
-.step{display:flex;gap:11px;align-items:center;padding:8px 0;font-size:14px;color:var(--mute)}
-.step.on{color:var(--ink);font-weight:700}
-.step.done{color:var(--gd)}
-.step .m{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;
-  display:grid;place-items:center;font-size:11px}
-.step.on .m{border-color:var(--ac);color:var(--ac)}
-.step.done .m{border-color:var(--gd);background:var(--gd);color:#fff}
-.sum{background:var(--acs);border-left:4px solid var(--ac);border-radius:10px;padding:15px 18px;
-  font-size:15px;line-height:1.9;margin-bottom:16px}
-.dec{border:1px solid var(--line);border-radius:10px;padding:13px 15px;margin-bottom:9px;background:#fff;
-  border-left:4px solid var(--gd)}
-.dec .h{font-weight:800;font-size:15px;line-height:1.6;margin-bottom:4px}
-.dec .m{font-size:13px;color:var(--mute)}
-.todo{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;
-  padding:12px 14px;margin-bottom:9px;background:#fff}
-.todo .who{background:var(--acs);color:var(--ac2);font-size:12px;font-weight:800;padding:4px 11px;
-  border-radius:99px;white-space:nowrap;flex:none;margin-top:1px}
-.todo .tx{flex:1;font-size:14.5px;line-height:1.7}
-.todo .due{font-size:12px;color:var(--wn);font-weight:700;white-space:nowrap;flex:none;margin-top:2px}
-.log{background:#fbfaf7;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
-  max-height:300px;overflow-y:auto;font-size:13.5px;line-height:1.9}
-.log p{margin:0 0 9px}
-.log .sp{font-weight:800;color:var(--ac2)}
-.log .ts{color:var(--mute);font-size:11.5px;margin-right:6px;font-variant-numeric:tabular-nums}
+.rec .t{font-size:38px;font-weight:800;font-variant-numeric:tabular-nums;
+  font-family:"Helvetica Neue",Arial,sans-serif}
+.rec .st{font-size:14px;opacity:.75;margin-top:2px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#e0503f;margin-right:7px;vertical-align:1px}
+.item2{display:flex;gap:13px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:14px 16px;margin-bottom:9px}
+.item2 .n{width:27px;height:27px;border-radius:50%;background:var(--gd);color:#fff;font-size:14px;
+  font-weight:800;display:grid;place-items:center;flex:none;margin-top:1px}
+.item2 .tx{flex:1;font-size:16px;line-height:1.65;font-weight:700}
+.item2 .tx small{display:block;font-size:13px;color:var(--mute);font-weight:600;margin-top:2px}
+.item2.todo .n{background:var(--ac)}
+.item2 .due{background:var(--wns);color:#8a3f16;font-size:13px;font-weight:800;padding:4px 11px;
+  border-radius:99px;white-space:nowrap;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
 
 <header class="appbar">
   <div class="in">
-    <a class="back" href="../">← デモ一覧</a>
-    <h1>会議・カンファレンス議事録</h1>
+    <a class="back" href="../">← もどる</a>
+    <h1>会議の議事録</h1>
     <span class="tagdemo">DEMO</span>
-    <p class="sub">録音するだけ。要約・決定事項・宿題まで自動で整理します</p>
   </div>
 </header>
 
-<div class="wrap">
+<div class="wrap narrow">
 
-  <div class="lead">
-    <b>サービス担当者会議には、病歴・服薬・ご家族の事情が必ず出てきます。</b>
-    だからクラウドの文字起こしサービスは使えない、という施設が多いです。
-    このデモは、<b>音声も文章も施設内のパソコンだけで処理して、外に一切出さない</b>形を想定しています。
-    <span class="try">▼ 「録音を開始」を押して、数秒後に「録音を終了」を押してください。</span>
+  <div class="flow">
+    <div class="st"><img class="ic lg" src="../assets/icon/mic.png" alt=""><span class="t">録音する</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/lock.png" alt=""><span class="t">施設の中で処理</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/check.png" alt=""><span class="t">議事録ができる</span></div>
   </div>
 
-  <div class="cols c23">
-
-    <div class="panel">
-      <h2>① 録音<span class="r">操作は2回だけ</span></h2>
-      <div class="pad">
-        <div class="rec">
-          <div><span class="dot hide" id="dot"></span><span id="mode" style="font-size:13px;opacity:.75">待機中</span></div>
-          <div class="wave" id="wave"></div>
-          <div class="t" id="timer">00:00</div>
-          <div class="st" id="rst">サービス担当者会議／山田ハナ様</div>
-        </div>
-        <div class="btnrow" style="margin-top:15px">
-          <button class="btn w" id="start">● 録音を開始</button>
-          <button class="btn o" id="stop" disabled>■ 録音を終了</button>
-          <button class="btn o sm hide" id="reset">最初から</button>
-        </div>
-        <div class="local">
-          <span class="ic">🔒</span>
-          <div><b>この処理は施設内で完結します。</b>音声ファイルも文字起こしも、インターネットには送信されません。
-          個人情報を外に出せない会議こそ、いちばん自動化の効果が出ます。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2>② 処理の流れ</h2>
-      <div class="pad">
-        <div class="step" id="s1"><span class="m">1</span>音声の取り込み</div>
-        <div class="step" id="s2"><span class="m">2</span>話し手ごとに文字起こし</div>
-        <div class="step" id="s3"><span class="m">3</span>要約の作成</div>
-        <div class="step" id="s4"><span class="m">4</span>決定事項の抽出</div>
-        <div class="step" id="s5"><span class="m">5</span>宿題（担当・期限）の割り出し</div>
-        <div class="note g hide" id="donebox" style="margin-bottom:0">
-          <b>完了しました。</b>これまで1時間かけていた議事録づくりが、<b>録音ボタン2回</b>で終わります。
-        </div>
-      </div>
-    </div>
-
+  <div class="irow gd">
+    <img class="ic" src="../assets/icon/lock.png" alt="">
+    <span class="t">音声も文章も、<b>外に出ません</b></span>
   </div>
 
+  <div class="rec">
+    <div><span class="dot hide" id="dot"></span><span id="mode" style="font-size:14px;opacity:.75">まだ録音していません</span></div>
+    <div class="wave" id="wave"></div>
+    <div class="t" id="timer">0:00</div>
+    <div class="st" id="rst">サービス担当者会議</div>
+  </div>
+
+  <button class="act go" id="start" style="margin-top:14px">
+    <img class="ic lg" src="../assets/icon/mic.png" alt="">
+    <span><span class="t">録音をはじめる</span><span class="s">押すだけ。あとは会議に集中できます</span></span>
+    <span class="arw">›</span>
+  </button>
+
+  <button class="act hide" id="stop" style="margin-top:10px">
+    <img class="ic lg" src="../assets/icon/check.png" alt="">
+    <span><span class="t">会議がおわった</span><span class="s">ここを押すと議事録ができます</span></span>
+    <span class="arw">›</span>
+  </button>
+
+  <p class="fine" id="status" style="text-align:center"></p>
+
+  <!-- 結果 -->
   <div id="out" class="hide">
 
+    <div class="big fu">
+      <img class="ic lg" src="../assets/icon/check.png" alt="">
+      <span><span class="n">議事録ができました</span><span class="l">これまで1時間かかっていた作業です</span></span>
+    </div>
+
     <div class="panel fu">
-      <h2>③ 議事録<span class="r">2026年8月21日（金）14:00-14:38／相談室</span></h2>
+      <h2><img class="ic sm" src="../assets/icon/paper.png" alt="">話し合われたこと</h2>
       <div class="pad">
-        <p style="margin-top:0;font-size:13.5px;color:var(--mute)">
-          <b>会議名：</b>サービス担当者会議（山田ハナ様）　<b>出席：</b>介護支援専門員 中村／施設長 佐藤／看護師 高橋／機能訓練指導員 井上／ご長男 山田様</p>
+        <p style="margin:0;font-size:16px;line-height:1.9">
+        朝食後の<b>むせ込みが今月3回</b>ありました。とろみは続けて、<b>嚥下の評価を主治医に依頼</b>します。<br>
+        歩行の<b>ふらつきが2回</b>あったため、<b>手すりを1本追加</b>します。<br>
+        ご長男から面会を増やしたいとの希望があり、<b>土曜の枠を確保</b>します。</p>
+      </div>
+    </div>
 
-        <h3 style="font-size:15px;margin:18px 0 8px">要約</h3>
-        <div class="sum">
-          朝食後のむせ込みが今月に入って3回確認されており、<b>誤嚥性肺炎のリスクが上がっている</b>と共有された。
-          水分へのとろみ付けは継続とし、あわせて<b>嚥下機能の評価を主治医に依頼</b>することで合意。
-          歩行時のふらつきについては、8月に入って2回のヒヤリハットがあり、<b>居室内の動線に手すりを1本追加</b>する方向で決定。
-          ご長男からは面会頻度を増やしたいとの申し出があり、<b>週末の面会枠を優先的に確保</b>することとした。
-          次回は栄養状態（Alb 3.4と低値）の推移を見て、栄養補助食品の追加を再検討する。
-        </div>
+    <div class="panel fu">
+      <h2><img class="ic sm" src="../assets/icon/check.png" alt="">決まったこと</h2>
+      <div class="pad">
+        <div class="item2"><span class="n">1</span><span class="tx">とろみを続ける<small>やめる判断は評価の結果を待つ</small></span></div>
+        <div class="item2"><span class="n">2</span><span class="tx">嚥下の評価を主治医へ依頼<small>次回の往診時</small></span></div>
+        <div class="item2"><span class="n">3</span><span class="tx">居室に手すりを1本追加<small>ベッドからトイレまで</small></span></div>
+        <div class="item2" style="margin-bottom:0"><span class="n">4</span><span class="tx">土曜の面会枠を確保<small>ご家族専用に</small></span></div>
+      </div>
+    </div>
 
-        <div class="cols c2">
-          <div>
-            <h3 style="font-size:15px;margin:0 0 8px">決定事項</h3>
-            <div class="dec"><div class="h">水分のとろみ付けを継続する</div><div class="m">中止の判断は嚥下評価の結果を待つ</div></div>
-            <div class="dec"><div class="h">嚥下機能の評価を主治医へ依頼する</div><div class="m">○○内科クリニック・次回往診時</div></div>
-            <div class="dec"><div class="h">居室内に手すりを1本追加する</div><div class="m">ベッド〜トイレの動線。福祉用具業者へ見積依頼</div></div>
-            <div class="dec"><div class="h">週末の面会枠を優先確保する</div><div class="m">土曜午後をご家族専用枠に</div></div>
-          </div>
-          <div>
-            <h3 style="font-size:15px;margin:0 0 8px">宿題（担当と期限）</h3>
-            <div class="todo"><span class="who">看護師 高橋</span><span class="tx">主治医へ嚥下評価を依頼。往診時に同席する</span><span class="due">8/28</span></div>
-            <div class="todo"><span class="who">施設長 佐藤</span><span class="tx">福祉用具業者へ手すり設置の見積を依頼</span><span class="due">8/25</span></div>
-            <div class="todo"><span class="who">井上</span><span class="tx">機能訓練メニューに立位バランス訓練を追加</span><span class="due">8/26</span></div>
-            <div class="todo"><span class="who">中村</span><span class="tx">ケアプランを修正し、ご家族へ交付</span><span class="due">9/1</span></div>
-            <div class="todo"><span class="who">高橋</span><span class="tx">栄養状態（Alb）の推移を次回までに整理</span><span class="due">次回会議</span></div>
-            <div class="note w" style="margin-bottom:0">
-              <b>宿題は担当者へ自動で通知できます。</b>「誰が何をいつまでに」が会議の場で確定するので、
-              次回に「あれどうなりました？」が起きなくなります。
-            </div>
-          </div>
-        </div>
-
-        <h3 style="font-size:15px;margin:20px 0 8px">文字起こし（抜粋）</h3>
-        <div class="log">
-          <p><span class="ts">14:03</span><span class="sp">看護師 高橋：</span>今月に入ってから、朝食のあとにむせ込みが3回出ています。いずれも食後10分以内でした。</p>
-          <p><span class="ts">14:04</span><span class="sp">施設長 佐藤：</span>とろみは今どのくらいの濃度でつけていますか。</p>
-          <p><span class="ts">14:04</span><span class="sp">看護師 高橋：</span>中間のとろみです。付けてからは落ち着いていますが、根本的なところは主治医に診ていただいたほうがいいと思います。</p>
-          <p><span class="ts">14:06</span><span class="sp">ご長男 山田様：</span>母は食べることが好きなので、あまり制限はしたくないのですが……。</p>
-          <p><span class="ts">14:07</span><span class="sp">介護支援専門員 中村：</span>制限をかけるというより、安全に召し上がっていただくための形を探る、という考え方でいかがでしょうか。まず嚥下の評価をお願いしましょう。</p>
-          <p><span class="ts">14:12</span><span class="sp">機能訓練指導員 井上：</span>歩行のほうですが、8月に入って2回、ふらつきでヒヤリハットが上がっています。</p>
-          <p><span class="ts">14:14</span><span class="sp">施設長 佐藤：</span>ベッドからトイレまでの間に手すりを1本足しましょう。業者に見積もりを取ります。</p>
-          <p style="color:var(--mute);text-align:center;margin:12px 0 0">— 以下、全文38分ぶんを保存しています —</p>
-        </div>
-
-        <div class="btnrow" style="margin-top:16px">
-          <button class="btn o" onclick="window.print()">議事録を印刷／PDFで保存</button>
-          <button class="btn o" onclick="alert('デモのため送信は行いません。\n\n実際には、出席者と担当者へ議事録と宿題を自動で配信できます。')">出席者へ配信</button>
+    <div class="panel fu">
+      <h2><img class="ic sm" src="../assets/icon/clock.png" alt="">だれが・いつまでに</h2>
+      <div class="pad">
+        <div class="item2 todo"><span class="n">高</span><span class="tx">主治医へ嚥下の評価を依頼</span><span class="due">8/28</span></div>
+        <div class="item2 todo"><span class="n">佐</span><span class="tx">手すりの見積もりを依頼</span><span class="due">8/25</span></div>
+        <div class="item2 todo"><span class="n">井</span><span class="tx">立位バランス訓練を追加</span><span class="due">8/26</span></div>
+        <div class="item2 todo" style="margin-bottom:0"><span class="n">中</span><span class="tx">ケアプランを直してご家族へ</span><span class="due">9/1</span></div>
+        <div class="irow wn" style="margin:14px 0 0">
+          <img class="ic" src="../assets/icon/check.png" alt="">
+          <span class="t">担当者へ<b>自動でお知らせ</b>できます</span>
         </div>
       </div>
     </div>
 
+    <button class="act" onclick="window.print()">
+      <img class="ic lg" src="../assets/icon/print.png" alt="">
+      <span><span class="t">印刷する</span><span class="s">PDFでの保存もできます</span></span>
+      <span class="arw">›</span>
+    </button>
+    <button class="act" id="reset" style="margin-top:10px">
+      <img class="ic lg" src="../assets/icon/mic.png" alt="">
+      <span><span class="t">もう一度ためす</span></span>
+      <span class="arw">›</span>
+    </button>
   </div>
 </div>
 
 <footer class="demo">
-  デモ用のサンプルです。登場する氏名・会議内容・医療機関名はすべて架空のものです。<br>
-  実際の様式は、施設で使っている議事録フォーマットに合わせて設定します。
+  デモ用のサンプルです。氏名・会議の内容はすべて架空のものです。<br>
+  画面の動きは実物ですが、要約の中身はあらかじめ用意したものです。
 </footer>
 
 <script>
 const el = id => document.getElementById(id);
 const wave = el('wave');
-for (let i=0;i<34;i++) wave.appendChild(document.createElement('i'));
+for (let i=0;i<30;i++) wave.appendChild(document.createElement('i'));
 const bars = [...wave.children];
 let timer=null, anim=null, sec=0;
-
-function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+const fmt = s => Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
 
 el('start').onclick = () => {
-  el('start').disabled = true; el('stop').disabled = false;
-  el('dot').classList.remove('hide');
-  el('dot').classList.add('pulse');
-  el('mode').textContent = '録音中';
-  sec = 0; el('timer').textContent = '00:00';
+  el('start').classList.add('hide');
+  el('stop').classList.remove('hide');
+  el('dot').classList.remove('hide'); el('dot').classList.add('pulse');
+  el('mode').textContent = '録音しています';
+  sec = 0; el('timer').textContent = '0:00';
   timer = setInterval(()=>{ sec++; el('timer').textContent = fmt(sec); }, 1000);
-  anim = setInterval(()=>{ bars.forEach(b => b.style.height = (5 + Math.floor(Math.random()*46)) + 'px'); }, 110);
+  anim = setInterval(()=>{ bars.forEach(b => b.style.height = (5 + Math.floor(Math.random()*42)) + 'px'); }, 110);
 };
 
 el('stop').onclick = () => {
   clearInterval(timer); clearInterval(anim);
   bars.forEach(b => b.style.height = '6px');
-  el('stop').disabled = true;
+  el('stop').classList.add('hide');
   el('dot').classList.add('hide'); el('dot').classList.remove('pulse');
-  el('mode').textContent = '処理中';
-  el('rst').innerHTML = '録音 ' + fmt(sec) + ' ぶんを施設内で処理しています';
-
-  const steps = ['s1','s2','s3','s4','s5'];
-  steps.forEach((id,i) => {
-    setTimeout(()=>{
-      if(i>0) { el(steps[i-1]).classList.remove('on'); el(steps[i-1]).classList.add('done');
-                el(steps[i-1]).querySelector('.m').textContent = '✓'; }
-      el(id).classList.add('on');
-      if(i === steps.length-1){
-        setTimeout(()=>{
-          el(id).classList.remove('on'); el(id).classList.add('done');
-          el(id).querySelector('.m').textContent = '✓';
-          el('mode').textContent = '完了';
-          el('rst').innerHTML = '<span style="color:#8de055;font-weight:700">✓ 議事録ができました</span>';
-          el('donebox').classList.remove('hide');
-          el('out').classList.remove('hide');
-          el('reset').classList.remove('hide');
-          el('out').scrollIntoView({behavior:'smooth', block:'start'});
-        }, 700);
-      }
-    }, i*620);
-  });
+  el('mode').textContent = 'まとめています';
+  el('rst').textContent = '施設の中だけで処理しています';
+  el('status').innerHTML = '<span class="spin"></span> まとめ中…';
+  setTimeout(()=>{
+    el('mode').textContent = 'できました';
+    el('rst').innerHTML = '<span style="color:#8de055;font-weight:700">✓ 議事録ができました</span>';
+    el('status').textContent = '';
+    el('out').classList.remove('hide');
+    el('out').scrollIntoView({behavior:'smooth', block:'start'});
+  }, 2600);
 };
 
 el('reset').onclick = () => {
-  ['s1','s2','s3','s4','s5'].forEach((id,i)=>{
-    const s = el(id); s.className='step'; s.querySelector('.m').textContent = i+1;
-  });
-  el('out').classList.add('hide'); el('donebox').classList.add('hide');
-  el('reset').classList.add('hide');
-  el('start').disabled = false; el('mode').textContent='待機中';
-  el('timer').textContent='00:00';
-  el('rst').textContent='サービス担当者会議／山田ハナ様';
+  el('out').classList.add('hide');
+  el('start').classList.remove('hide');
+  el('mode').textContent='まだ録音していません';
+  el('timer').textContent='0:00';
+  el('rst').textContent='サービス担当者会議';
   window.scrollTo({top:0,behavior:'smooth'});
 };
 </script>

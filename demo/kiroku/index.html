@@ -4,208 +4,163 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>介護記録・診断書の読み取り｜デモ</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🏥</text></svg>">
-<link rel="stylesheet" href="../assets/demo.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<title>介護記録の読み取り｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css?v=2">
 <style>
-.paper{background:#fffdf7;border:1px solid #ddd5c4;border-radius:6px;padding:16px 18px;
-  box-shadow:0 2px 9px rgba(24,34,44,.08);position:relative}
+.paper{background:#fffdf7;border:1px solid #ddd5c4;border-radius:10px;padding:18px 20px;position:relative}
 .paper::before{content:"";position:absolute;inset:0;background:
-  repeating-linear-gradient(transparent,transparent 27px,#e8e0cf 27px,#e8e0cf 28px);
-  opacity:.55;pointer-events:none;border-radius:6px}
-.paper h4{margin:0 0 10px;font-size:13px;letter-spacing:.1em;color:#8a7b5e;border-bottom:1.5px solid #ddd5c4;
-  padding-bottom:7px;position:relative}
-.hw{font-family:"Klee One","Yu Mincho",serif;font-size:15px;line-height:28px;color:#2a3550;position:relative}
-.hw .lb{color:#8a7b5e;font-size:12px;font-family:inherit}
+  repeating-linear-gradient(transparent,transparent 29px,#e8e0cf 29px,#e8e0cf 30px);
+  opacity:.5;pointer-events:none;border-radius:10px}
+.hw{font-family:"Klee One","Yu Mincho",serif;font-size:16px;line-height:30px;color:#2a3550;position:relative}
+.hw .lb{color:#8a7b5e;font-size:12.5px}
 .hw .sc{transform:rotate(-1.1deg);display:inline-block}
 .hw .sc2{transform:rotate(.8deg);display:inline-block}
 .scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#4da3e0,transparent);
   box-shadow:0 0 14px 3px rgba(77,163,224,.55);top:0;border-radius:3px;z-index:3}
 @keyframes scanmove{0%{top:2%}100%{top:97%}}
-.scanning .scan{animation:scanmove 1.5s ease-in-out infinite alternate}
-.field{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin-bottom:9px}
-.field .k{font-size:11.5px;color:var(--mute);font-weight:700;letter-spacing:.04em}
-.field .v{font-size:17px;font-weight:800;margin-top:2px;font-variant-numeric:tabular-nums}
-.field .v small{font-size:12.5px;font-weight:600;color:var(--mute);margin-left:2px}
-.f2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.f2 .field{margin-bottom:0}
-.conf{float:right;font-size:10.5px;color:var(--gd);font-weight:700;background:var(--gds);
-  padding:1px 7px;border-radius:99px}
+.scanning .scan{animation:scanmove 1.4s ease-in-out infinite alternate}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.val{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.val .k{font-size:12px;color:var(--mute);font-weight:700}
+.val .v{font-size:24px;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums;margin-top:1px}
+.val .v small{font-size:13px;font-weight:600;color:var(--mute);margin-left:2px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tg{display:flex;align-items:center;gap:7px;background:#fff;border:2px solid var(--line);
+  border-radius:99px;padding:6px 14px 6px 7px;font-size:14px;font-weight:800}
+.tg.dg{border-color:#e8c4c1;background:var(--dgs);color:var(--dg)}
+.tg.wn{border-color:#e8cdb4;background:var(--wns);color:#8a3f16}
 </style>
 </head>
 <body>
 
 <header class="appbar">
   <div class="in">
-    <a class="back" href="../">← デモ一覧</a>
-    <h1>介護記録・診断書の読み取り</h1>
+    <a class="back" href="../">← もどる</a>
+    <h1>介護記録の読み取り</h1>
     <span class="tagdemo">DEMO</span>
-    <p class="sub">手書きの記録用紙を撮るだけで、データになります</p>
   </div>
 </header>
 
-<div class="wrap">
+<div class="wrap narrow">
 
-  <div class="lead">
-    <b>紙をなくすのではなく、紙のまま使いながらデータにもなる形です。</b>
-    現場の職員はこれまで通り手書きでかまいません。夜勤明けにPCへ打ち直す作業だけが消えます。
-    <span class="try">▼ 下の「この用紙を撮影する」を押してみてください。</span>
-  </div>
-
-  <div class="cols c2">
-
-    <div class="panel">
-      <h2>① 現場の手書き記録<span class="r">紙はこれまで通り</span></h2>
-      <div class="pad">
-        <div class="paper" id="paper">
-          <div class="scan hide" id="scanline"></div>
-          <h4>介 護 記 録 用 紙　／　2026年8月21日</h4>
-          <div class="hw">
-            <span class="lb">利用者名</span>　<span class="sc">山田 ハナ　様（302号室）</span><br>
-            <span class="lb">記録者</span>　<span class="sc2">佐藤</span>　<span class="lb">時刻</span> <span class="sc">6:40</span><br>
-            <span class="lb">体温</span> <span class="sc">36.8</span>　<span class="lb">血圧</span> <span class="sc2">138 / 82</span><br>
-            <span class="lb">脈拍</span> <span class="sc">76</span>　<span class="lb">SpO2</span> <span class="sc2">97</span><br>
-            <span class="lb">食事</span> 主<span class="sc">8</span>／副<span class="sc2">10</span>　<span class="lb">水分</span> <span class="sc">450</span>ml<br>
-            <span class="lb">排泄</span> 尿<span class="sc2">4</span>回　便<span class="sc">1</span>回（普通便）<br>
-            <span class="lb">特記</span> <span class="sc">朝食後に軽いむせ込みあり。</span><br>
-            <span class="sc2">水分にとろみ追加で対応。以降は落ち着く。</span><br>
-            <span class="sc">歩行時にふらつき見られ、見守り強化。</span>
-          </div>
-        </div>
-        <div class="btnrow" style="margin-top:15px">
-          <button class="btn" id="shot">📷　この用紙を撮影する</button>
-          <button class="btn o sm hide" id="again">もう一度</button>
-        </div>
-        <p class="fine" id="status"></p>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2>② 自動で構造化されたデータ<span class="r" id="rtime"></span></h2>
-      <div class="pad">
-        <div id="empty" style="text-align:center;padding:52px 14px;color:var(--mute);font-size:14px;line-height:1.9">
-          左の用紙を撮影すると<br>ここに読み取り結果が出ます
-        </div>
-        <div id="result" class="hide"></div>
-      </div>
-    </div>
-
+  <!-- 3ステップの流れ -->
+  <div class="flow">
+    <div class="st"><img class="ic lg" src="../assets/icon/paper.png" alt=""><span class="t">手書きの記録</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/camera.png" alt=""><span class="t">撮るだけ</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/data.png" alt=""><span class="t">データになる</span></div>
   </div>
 
   <div class="panel">
-    <h2>③ 加算の記録漏れアラート<span class="r">2026年8月分・8月21日時点</span></h2>
     <div class="pad">
-      <p class="note w" style="margin-top:0"><strong>記録が算定の要件になっている加算は、記録が抜けるとそのまま減収になります。</strong>
-      「今月まだ記録が足りていない方」を毎朝自動で出せば、締め日に慌てなくて済みます。</p>
-      <div class="kpis">
-        <div class="kpi"><div class="n">51<small>名</small></div><div class="l">入居者数</div></div>
-        <div class="kpi gd"><div class="n">47<small>名</small></div><div class="l">今月の記録 充足</div></div>
-        <div class="kpi dg"><div class="n">4<small>名</small></div><div class="l">記録が不足</div></div>
-        <div class="kpi wn"><div class="n">10<small>日</small></div><div class="l">締切まで</div></div>
+      <div class="paper" id="paper">
+        <div class="scan hide" id="scanline"></div>
+        <div class="hw">
+          <span class="lb">利用者</span>　<span class="sc">山田 ハナ　様（302号室）</span><br>
+          <span class="lb">体温</span> <span class="sc">36.8</span>　<span class="lb">血圧</span> <span class="sc2">138 / 82</span><br>
+          <span class="lb">脈拍</span> <span class="sc">76</span>　<span class="lb">SpO2</span> <span class="sc2">97</span><br>
+          <span class="lb">食事</span> 主<span class="sc">8</span>／副<span class="sc2">10</span>　<span class="lb">水分</span> <span class="sc">450</span>ml<br>
+          <span class="lb">特記</span> <span class="sc">朝食後に軽いむせ込みあり。</span><br>
+          <span class="sc2">歩行時にふらつき、見守り強化。</span>
+        </div>
       </div>
-      <div class="tw">
-        <table>
-          <thead><tr><th>利用者</th><th>居室</th><th>対象の加算</th><th class="n">必要</th><th class="n">実績</th><th>状態</th></tr></thead>
-          <tbody>
-            <tr class="al"><td><b>鈴木 マサル</b> 様</td><td>105</td><td>個別機能訓練加算</td><td class="n">週2回</td><td class="n">週0回</td><td><span class="b dg">未実施 2週</span></td></tr>
-            <tr class="al"><td><b>田中 キヨ</b> 様</td><td>208</td><td>科学的介護推進体制加算</td><td class="n">月1回</td><td class="n">未提出</td><td><span class="b dg">要対応</span></td></tr>
-            <tr class="hi"><td><b>渡辺 シゲル</b> 様</td><td>311</td><td>口腔・栄養スクリーニング加算</td><td class="n">6か月毎</td><td class="n">期限間近</td><td><span class="b wn">残り5日</span></td></tr>
-            <tr class="hi"><td><b>小林 フミ</b> 様</td><td>402</td><td>排せつ支援加算</td><td class="n">月1回</td><td class="n">3/4週</td><td><span class="b wn">あと1回</span></td></tr>
-            <tr><td>山田 ハナ 様</td><td>302</td><td>個別機能訓練加算</td><td class="n">週2回</td><td class="n">週2回</td><td><span class="b gd">充足</span></td></tr>
-            <tr><td>伊藤 タダシ 様</td><td>203</td><td>科学的介護推進体制加算</td><td class="n">月1回</td><td class="n">提出済</td><td><span class="b gd">充足</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="fine">※加算の名称・要件は制度改定で変わります。導入時はその時点の算定要件に合わせて設定します。</p>
     </div>
   </div>
 
-  <div class="panel">
-    <h2>④ 医師の診断書・検査結果もまとめて</h2>
-    <div class="pad">
-      <p style="margin-top:0">病院からの診断書や検査結果も、同じように撮るだけで利用者ごとに紐づきます。
-      <strong>「あの方の直近3か月の血圧」がその場で出せる</strong>ので、ご家族への説明やサービス担当者会議の準備が早くなります。</p>
-      <div class="tw">
-        <table>
-          <thead><tr><th>取り込んだ書類</th><th>利用者</th><th>発行元</th><th>日付</th><th>自動で拾った項目</th></tr></thead>
-          <tbody>
-            <tr><td>診療情報提供書</td><td>山田 ハナ 様</td><td>○○内科クリニック</td><td>2026/08/12</td><td><span class="b ac">高血圧症</span> <span class="b ac">内服5剤</span></td></tr>
-            <tr><td>血液検査結果</td><td>山田 ハナ 様</td><td>○○内科クリニック</td><td>2026/08/12</td><td><span class="b ac">HbA1c 6.4</span> <span class="b wn">Alb 3.4 低値</span></td></tr>
-            <tr><td>お薬手帳（写真）</td><td>鈴木 マサル 様</td><td>△△薬局</td><td>2026/08/05</td><td><span class="b ac">処方6剤</span> <span class="b dg">併用注意1件</span></td></tr>
-            <tr><td>退院時サマリ</td><td>田中 キヨ 様</td><td>□□総合病院</td><td>2026/07/28</td><td><span class="b ac">誤嚥性肺炎</span> <span class="b wn">とろみ指示</span></td></tr>
-          </tbody>
-        </table>
+  <button class="act go" id="shot">
+    <img class="ic lg" src="../assets/icon/camera.png" alt="">
+    <span><span class="t">この紙を撮る</span><span class="s">やることは、これだけです</span></span>
+    <span class="arw">›</span>
+  </button>
+
+  <p class="fine" id="status" style="text-align:center"></p>
+
+  <!-- 結果 -->
+  <div id="result" class="hide">
+    <div class="big fu">
+      <img class="ic lg" src="../assets/icon/check.png" alt="">
+      <span><span class="n">1.8<small style="font-size:18px">秒</small></span><span class="l">入力おわり</span></span>
+    </div>
+
+    <div class="panel fu">
+      <div class="pad">
+        <div class="oneline">
+          <img class="ic" src="../assets/icon/data.png" alt="">
+          <span class="t">読み取った内容<small>山田ハナ様・302号室</small></span>
+        </div>
+        <div class="vals">
+          <div class="val"><div class="k">体温</div><div class="v">36.8<small>℃</small></div></div>
+          <div class="val"><div class="k">血圧</div><div class="v">138/82</div></div>
+          <div class="val"><div class="k">脈拍</div><div class="v">76<small>回</small></div></div>
+          <div class="val"><div class="k">SpO₂</div><div class="v">97<small>%</small></div></div>
+          <div class="val"><div class="k">食事 主/副</div><div class="v">8/10</div></div>
+          <div class="val"><div class="k">水分</div><div class="v">450<small>ml</small></div></div>
+        </div>
       </div>
+    </div>
+
+    <div class="irow dg fu">
+      <img class="ic" src="../assets/icon/alert.png" alt="">
+      <span class="t">気になる言葉を自動で拾いました</span>
+    </div>
+    <div class="tags fu" style="margin-bottom:16px">
+      <span class="tg dg"><img class="ic sm" src="../assets/icon/alert.png" alt="">誤嚥リスク</span>
+      <span class="tg wn"><img class="ic sm" src="../assets/icon/alert.png" alt="">転倒リスク</span>
+      <span class="tg"><img class="ic sm" src="../assets/icon/check.png" alt="">夜勤へ申し送り</span>
+    </div>
+
+    <button class="act" id="again">
+      <img class="ic lg" src="../assets/icon/camera.png" alt="">
+      <span><span class="t">もう一度ためす</span></span>
+      <span class="arw">›</span>
+    </button>
+  </div>
+
+  <!-- 加算アラート -->
+  <div class="panel" style="margin-top:22px">
+    <h2><img class="ic sm" src="../assets/icon/clock.png" alt="">記録が足りない方</h2>
+    <div class="pad">
+      <div class="icards c3" style="margin-bottom:14px">
+        <div class="icard gd"><img class="ic" src="../assets/icon/check.png" alt=""><span class="v">47<small>名</small></span><span class="t">足りている</span></div>
+        <div class="icard dg"><img class="ic" src="../assets/icon/alert.png" alt=""><span class="v">4<small>名</small></span><span class="t">足りない</span></div>
+        <div class="icard wn"><img class="ic" src="../assets/icon/clock.png" alt=""><span class="v">10<small>日</small></span><span class="t">締切まで</span></div>
+      </div>
+      <div class="irow dg"><img class="ic" src="../assets/icon/alert.png" alt=""><span class="t"><b>鈴木 マサル 様</b>（105）<br>個別機能訓練　2週間 未実施</span></div>
+      <div class="irow dg"><img class="ic" src="../assets/icon/alert.png" alt=""><span class="t"><b>田中 キヨ 様</b>（208）<br>科学的介護推進　未提出</span></div>
+      <div class="irow wn"><img class="ic" src="../assets/icon/clock.png" alt=""><span class="t"><b>渡辺 シゲル 様</b>（311）<br>口腔・栄養　あと5日</span></div>
+      <div class="irow wn" style="margin-bottom:0"><img class="ic" src="../assets/icon/clock.png" alt=""><span class="t"><b>小林 フミ 様</b>（402）<br>排せつ支援　あと1回</span></div>
+      <p class="fine" style="margin-top:12px">記録が足りないと加算が取れず、そのまま減収になります。</p>
     </div>
   </div>
 
 </div>
 
 <footer class="demo">
-  デモ用のサンプルです。登場する氏名・数値・医療機関名はすべて架空のものです。<br>
-  実際の帳票の様式・項目は、施設で使っている用紙に合わせて設定します。
+  デモ用のサンプルです。氏名・数値はすべて架空のものです。<br>
+  画面の動きは実物ですが、読み取り結果はあらかじめ用意したものです。
 </footer>
 
 <script>
-const F = [
-  {k:'利用者',       v:'山田 ハナ 様',      s:'302号室'},
-  {k:'記録日時',     v:'2026/08/21 6:40',  s:''},
-  {k:'記録者',       v:'佐藤',             s:''}
-];
-const V = [
-  {k:'体温', v:'36.8', u:'℃'}, {k:'血圧', v:'138/82', u:'mmHg'},
-  {k:'脈拍', v:'76', u:'回/分'}, {k:'SpO₂', v:'97', u:'%'},
-  {k:'食事 主食', v:'8', u:'/10'}, {k:'食事 副食', v:'10', u:'/10'},
-  {k:'水分摂取', v:'450', u:'ml'}, {k:'排泄', v:'尿4 / 便1', u:''}
-];
 const el = id => document.getElementById(id);
-
 el('shot').addEventListener('click', () => {
-  const btn = el('shot');
-  btn.disabled = true;
+  el('shot').disabled = true;
   el('paper').classList.add('scanning');
   el('scanline').classList.remove('hide');
-  el('status').innerHTML = '<span class="spin"></span> 読み取り中… <span style="color:var(--gd);font-weight:700">施設内で処理しています（外部送信なし）</span>';
-
+  el('status').innerHTML = '<span class="spin"></span> 読み取り中…';
   setTimeout(() => {
     el('paper').classList.remove('scanning');
     el('scanline').classList.add('hide');
-    el('status').innerHTML = '<span style="color:var(--gd);font-weight:700">✓ 読み取り完了（1.8秒）</span>　この間、職員の操作は撮影の1回だけです。';
-    el('empty').classList.add('hide');
-    el('rtime').textContent = '読み取り精度 98%';
-    el('again').classList.remove('hide');
-
-    el('result').innerHTML =
-      F.map(f=>`<div class="field fu"><span class="k">${f.k}</span>
-        <div class="v">${f.v}${f.s?` <small>${f.s}</small>`:''}</div></div>`).join('') +
-      '<div class="f2" style="margin-bottom:9px">' +
-      V.map(v=>`<div class="field fu"><span class="k">${v.k}</span>
-        <div class="v">${v.v}${v.u?`<small>${v.u}</small>`:''}</div></div>`).join('') + '</div>' +
-      `<div class="field fu" style="border-left:3px solid var(--wn)">
-        <span class="conf">要注意 自動検知</span>
-        <span class="k">特記事項</span>
-        <div style="font-size:14.5px;line-height:1.8;margin-top:4px">
-        朝食後に軽い<b>むせ込み</b>あり。水分に<b>とろみ</b>追加で対応し、以降は落ち着く。<br>
-        歩行時に<b>ふらつき</b>が見られ、見守りを強化。</div></div>
-       <div class="field fu" style="background:var(--wns);border-color:#e8cdb4">
-        <span class="k">自動でついたタグ</span>
-        <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
-          <span class="b dg">誤嚥リスク</span><span class="b wn">転倒リスク</span>
-          <span class="b ac">とろみ対応中</span><span class="b gd">申し送り対象</span>
-        </div>
-        <p class="fine" style="margin-top:9px">「むせ込み」「ふらつき」を拾って、<b>夜勤への申し送りに自動で入ります。</b>
-        書き漏らしても、記録から拾い上げます。</p></div>`;
+    el('status').textContent = '';
     el('result').classList.remove('hide');
-  }, 2000);
+    el('result').scrollIntoView({behavior:'smooth', block:'start'});
+  }, 1900);
 });
-
 el('again').addEventListener('click', () => {
   el('shot').disabled = false;
   el('result').classList.add('hide');
-  el('empty').classList.remove('hide');
-  el('again').classList.add('hide');
-  el('status').textContent = '';
-  el('rtime').textContent = '';
+  window.scrollTo({top:0, behavior:'smooth'});
 });
 </script>
 </body>

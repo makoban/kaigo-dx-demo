@@ -4,152 +4,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>ご家族への様子配信・アンケート｜デモ</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🏥</text></svg>">
-<link rel="stylesheet" href="../assets/demo.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<title>ご家族へのお知らせ｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css?v=2">
 <style>
-.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.pic{aspect-ratio:1;border-radius:9px;cursor:pointer;border:3px solid transparent;position:relative;
-  display:grid;place-items:center;font-size:26px;transition:.13s;-webkit-tap-highlight-color:transparent}
-.pic:hover{transform:translateY(-2px)}
-.pic.on{border-color:var(--gd);box-shadow:0 0 0 3px var(--gds)}
-.pic .ck{position:absolute;top:4px;right:4px;width:19px;height:19px;border-radius:50%;background:var(--gd);
-  color:#fff;font-size:11px;display:grid;place-items:center;opacity:0;transition:.13s}
+.pics{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.pic{aspect-ratio:1;border-radius:14px;cursor:pointer;border:3px solid transparent;position:relative;
+  display:grid;place-items:center;font-size:32px;transition:.13s;-webkit-tap-highlight-color:transparent}
+.pic:hover{transform:translateY(-3px)}
+.pic.on{border-color:var(--gd);box-shadow:0 0 0 4px var(--gds)}
+.pic .ck{position:absolute;top:5px;right:5px;width:24px;height:24px;border-radius:50%;background:var(--gd);
+  color:#fff;font-size:14px;display:grid;place-items:center;opacity:0;transition:.13s;font-weight:800}
 .pic.on .ck{opacity:1}
-.pic .cap{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.42);color:#fff;font-size:9.5px;
-  padding:2px 4px;border-radius:0 0 6px 6px;line-height:1.4}
-.lmsg{background:#fff;border-radius:14px;border-bottom-left-radius:4px;padding:10px;max-width:88%;
-  align-self:flex-start;font-size:13px;line-height:1.7}
-.lmsg .ph{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:8px}
-.lmsg .ph div{aspect-ratio:1;border-radius:7px;display:grid;place-items:center;font-size:22px}
+.lmsg{background:#fff;border-radius:16px;border-bottom-left-radius:5px;padding:11px;max-width:88%;
+  align-self:flex-start;font-size:14px;line-height:1.7}
+.lmsg .ph{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.lmsg .ph div{aspect-ratio:1;border-radius:9px;display:grid;place-items:center;font-size:26px}
 .lmsg .ph div:only-child{grid-column:1/-1;aspect-ratio:16/10}
-.bars{display:flex;flex-direction:column;gap:9px}
-.brow{display:grid;grid-template-columns:96px 1fr 52px;gap:10px;align-items:center;font-size:13.5px}
-.brow .tr{height:22px;background:var(--line2);border-radius:5px;overflow:hidden}
-.brow .tr i{display:block;height:100%;border-radius:5px;background:var(--ac);transition:width .8s ease}
-.brow .pc{text-align:right;font-weight:800;font-variant-numeric:tabular-nums;font-size:13px}
-.brow.g .tr i{background:var(--gd)} .brow.w .tr i{background:var(--wn)} .brow.d .tr i{background:var(--dg)}
-.vc{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:9px;
-  padding:12px 14px;margin-bottom:8px;font-size:14px;line-height:1.75}
-.vc .m{font-size:11.5px;color:var(--mute);margin-top:5px}
-.vc.neg{border-left-color:var(--wn);background:var(--wns)}
+.brow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.brow .nm{width:104px;font-size:14px;font-weight:700;flex:none}
+.brow .tr{flex:1;height:26px;background:var(--line2);border-radius:7px;overflow:hidden}
+.brow .tr i{display:block;height:100%;border-radius:7px;background:var(--gd)}
+.brow .pc{width:38px;text-align:right;font-weight:800;font-size:15px;flex:none}
+.brow.w .tr i{background:var(--wn)} .brow.d .tr i{background:var(--dg)}
 </style>
 </head>
 <body>
 
 <header class="appbar">
   <div class="in">
-    <a class="back" href="../">← デモ一覧</a>
-    <h1>ご家族への様子配信・満足度アンケート</h1>
+    <a class="back" href="../">← もどる</a>
+    <h1>ご家族へのお知らせ</h1>
     <span class="tagdemo">DEMO</span>
-    <p class="sub">写真を選んで送るだけ。アンケートは集計まで自動で出ます</p>
   </div>
 </header>
 
 <div class="wrap">
 
-  <div class="lead">
-    <b>ご家族からの「最近どうですか」の電話は、そのつど現場の手が止まります。</b>
-    先に様子が届いていれば、その電話自体が減ります。
-    そして<b>様子が伝わっているご家族は、クレームではなく相談をくださる</b>ようになります。
-    <span class="try">▼ 写真を選んで「配信する」を押してみてください。右のスマホに届きます。</span>
+  <div class="flow">
+    <div class="st"><img class="ic lg" src="../assets/icon/photo.png" alt=""><span class="t">写真を選ぶ</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/chat.png" alt=""><span class="t">送る</span></div>
+    <span class="ar">→</span>
+    <div class="st"><img class="ic lg" src="../assets/icon/family.png" alt=""><span class="t">ご家族に届く</span></div>
   </div>
 
   <div class="cols c2">
 
     <div class="panel">
-      <h2>① 配信をつくる<span class="r">操作は写真を選ぶだけ</span></h2>
+      <h2><img class="ic sm" src="../assets/icon/photo.png" alt="">写真を選んでください</h2>
       <div class="pad">
-        <div class="fg"><label class="fl">今日の写真から選ぶ（タップで選択）</label>
-          <div class="pics" id="pics"></div>
-        </div>
-        <div class="fg"><label class="fl">ひとこと（定型文から選べます）</label>
-          <select id="tmpl">
-            <option>今日は皆さんで夏祭りの飾りづくりをしました。とても賑やかな午後でした。</option>
-            <option>お天気が良かったので、中庭でお茶の時間を過ごしました。</option>
-            <option>今月のお誕生日会を開きました。皆さんで歌をうたいました。</option>
-            <option>リハビリの様子です。少しずつ歩く距離が伸びています。</option>
+        <div class="pics" id="pics"></div>
+        <div class="fg" style="margin-top:16px">
+          <label class="fl">ひとこと</label>
+          <select id="tmpl" style="font-size:15px">
+            <option>今日は皆さんで夏祭りの飾りを作りました。</option>
+            <option>お天気がよく、中庭でお茶をしました。</option>
+            <option>今月のお誕生日会をひらきました。</option>
+            <option>リハビリの様子です。少しずつ歩けています。</option>
           </select>
         </div>
-        <div class="fg"><label class="fl">配信先</label>
-          <select id="to">
-            <option>ご家族 全員（48世帯）</option>
-            <option>3階のご家族（16世帯）</option>
-            <option>山田ハナ様 ご家族のみ</option>
-          </select>
-        </div>
-        <div class="btnrow">
-          <button class="btn g" id="send">この内容で配信する</button>
-          <span id="smsg" style="font-size:13.5px;font-weight:700;color:var(--gd)"></span>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <b>運用そのものを外に任せることもできます。</b>
-          「写真は撮るけれど、文章を考えて送る時間がない」という場合は、写真を渡すだけで配信まで代行する形にできます。
-        </div>
+        <button class="act go" id="send">
+          <img class="ic lg" src="../assets/icon/chat.png" alt="">
+          <span><span class="t">送る</span><span class="s">ご家族 全員（48世帯）へ</span></span>
+          <span class="arw">›</span>
+        </button>
+        <p class="fine" id="smsg" style="text-align:center"></p>
       </div>
     </div>
 
     <div class="panel">
-      <h2>② ご家族のスマホ<span class="r">いつものLINE</span></h2>
+      <h2><img class="ic sm" src="../assets/icon/family.png" alt="">ご家族のスマホ</h2>
       <div class="pad">
         <div class="phone">
           <div class="scr">
-            <div class="bar">🏠　○○ホーム　からのお知らせ</div>
+            <div class="bar">🏠　○○ホーム</div>
             <div class="body" id="lbody">
-              <div class="lmsg">いつもお世話になっております。<br>施設からの様子は、こちらでお届けしています。</div>
+              <div class="lmsg">施設からの様子は、こちらでお届けしています。</div>
             </div>
           </div>
         </div>
-        <p class="fine" style="text-align:center">アプリのインストールは不要です。ご家族はLINEを友だち追加するだけです。</p>
+        <p class="fine" style="text-align:center;margin-top:12px">アプリを入れる必要はありません</p>
       </div>
     </div>
 
   </div>
 
   <div class="panel">
-    <h2>③ 満足度アンケート<span class="r">2026年8月／回答 39/48世帯（回収率81%）</span></h2>
+    <h2><img class="ic sm" src="../assets/icon/check.png" alt="">満足度アンケート<span class="r">39/48世帯が回答</span></h2>
     <div class="pad">
-      <div class="note g" style="margin-top:0">
-        <b>紙のアンケートは、配って・集めて・数える手間で続きません。</b>
-        LINEなら3問だけ、タップで答えられます。回答した方に小さな特典（面会時のドリンク券など）をつけると回収率が上がります。
-        <b>集計はここに自動で出ます。</b>
+      <div class="icards c3" style="margin-bottom:18px">
+        <div class="icard gd"><img class="ic" src="../assets/icon/check.png" alt=""><span class="v">4.3</span><span class="t">総合の満足度</span></div>
+        <div class="icard gd"><img class="ic" src="../assets/icon/family.png" alt=""><span class="v">87<small>%</small></span><span class="t">人に勧めたい</span></div>
+        <div class="icard dg"><img class="ic" src="../assets/icon/alert.png" alt=""><span class="v">3<small>件</small></span><span class="t">気になる声</span></div>
       </div>
 
-      <div class="kpis">
-        <div class="kpi gd"><div class="n">4.3</div><div class="l">総合満足度（5点満点）</div></div>
-        <div class="kpi"><div class="n">81<small>%</small></div><div class="l">回収率</div></div>
-        <div class="kpi gd"><div class="n">87<small>%</small></div><div class="l">知人に勧めたい</div></div>
-        <div class="kpi wn"><div class="n">3<small>件</small></div><div class="l">要対応の声</div></div>
-      </div>
+      <div class="brow"><span class="nm">職員の対応</span><div class="tr"><i style="width:94%"></i></div><span class="pc">4.7</span></div>
+      <div class="brow"><span class="nm">お食事</span><div class="tr"><i style="width:88%"></i></div><span class="pc">4.4</span></div>
+      <div class="brow"><span class="nm">清潔さ</span><div class="tr"><i style="width:90%"></i></div><span class="pc">4.5</span></div>
+      <div class="brow"><span class="nm">レクリエーション</span><div class="tr"><i style="width:78%"></i></div><span class="pc">3.9</span></div>
+      <div class="brow w"><span class="nm">様子の伝わり方</span><div class="tr"><i style="width:64%"></i></div><span class="pc">3.2</span></div>
+      <div class="brow d"><span class="nm">面会のしやすさ</span><div class="tr"><i style="width:58%"></i></div><span class="pc">2.9</span></div>
 
-      <div class="cols c2">
-        <div>
-          <h4 style="margin:0 0 10px;font-size:15px">項目ごとの満足度</h4>
-          <div class="bars">
-            <div class="brow g"><span>職員の対応</span><div class="tr"><i style="width:94%"></i></div><span class="pc">4.7</span></div>
-            <div class="brow g"><span>お食事</span><div class="tr"><i style="width:88%"></i></div><span class="pc">4.4</span></div>
-            <div class="brow g"><span>清潔さ</span><div class="tr"><i style="width:90%"></i></div><span class="pc">4.5</span></div>
-            <div class="brow"><span>レクリエーション</span><div class="tr"><i style="width:78%"></i></div><span class="pc">3.9</span></div>
-            <div class="brow w"><span>様子の伝わり方</span><div class="tr"><i style="width:64%"></i></div><span class="pc">3.2</span></div>
-            <div class="brow d"><span>面会のしやすさ</span><div class="tr"><i style="width:58%"></i></div><span class="pc">2.9</span></div>
-          </div>
-          <div class="note w">
-            <b>低い2項目に、打ち手がそのまま出ています。</b>
-            「様子の伝わり方」は上の配信で直接上がります。
-            「面会のしやすさ」は、土日の面会枠や送迎の有無が原因のことが多く、<b>ここは他施設と差がつけられる部分</b>です。
-          </div>
-        </div>
-        <div>
-          <h4 style="margin:0 0 10px;font-size:15px">ご家族の声（自由記述）</h4>
-          <div class="vc">職員の皆さんがいつも笑顔で接してくださり、母も穏やかに過ごせているようです。<div class="m">ご長女／3階</div></div>
-          <div class="vc">食事の写真を送っていただけるのが嬉しいです。遠方なので様子が分かると安心します。<div class="m">ご次男／2階</div></div>
-          <div class="vc neg">土曜に面会に行きたいのですが、枠が埋まっていることが多く……もう少し取りやすいと助かります。<div class="m">ご長男／1階　<span class="b wn">要対応</span></div></div>
-          <div class="vc neg">父の日中の様子がもう少し分かるとありがたいです。<div class="m">ご長女／2階　<span class="b wn">要対応</span></div></div>
-          <div class="note" style="margin-bottom:0">
-            <b>満足度の高い方には、そのまま口コミ投稿をご案内できます。</b>
-            「勧めたい」と答えた方だけに、Googleの口コミ投稿リンクを自動で送る、という運用ができます。
-          </div>
-        </div>
+      <div class="irow wn" style="margin-top:16px">
+        <img class="ic" src="../assets/icon/alert.png" alt="">
+        <span class="t">低い2つに、<b>やることが出ています</b><br>
+        <small style="color:var(--mute);font-weight:600">「様子の伝わり方」は上の配信で上がります。「面会のしやすさ」は土日の枠や送迎で差がつけられます。</small></span>
+      </div>
+      <div class="irow gd" style="margin-bottom:0">
+        <img class="ic" src="../assets/icon/check.png" alt="">
+        <span class="t">満足度の高い方には、<b>口コミの投稿をご案内</b>できます</span>
       </div>
     </div>
   </div>
@@ -157,23 +121,21 @@
 </div>
 
 <footer class="demo">
-  デモ用のサンプルです。登場する氏名・数値・ご家族の声はすべて架空のものです。
+  デモ用のサンプルです。氏名・数値・ご家族の声はすべて架空のものです。<br>
+  画面の動きは実物ですが、実際には送信していません。
 </footer>
 
 <script>
 const PICS = [
-  {e:'🎋',c:'夏祭りの飾り',b:'#e7f0f8'},{e:'🍱',c:'今日の昼食',b:'#fbeedc'},
-  {e:'🌻',c:'中庭のひまわり',b:'#e4eee7'},{e:'🎂',c:'お誕生日会',b:'#f7e6ec'},
-  {e:'🫖',c:'おやつの時間',b:'#efe8dc'},{e:'🚶',c:'リハビリ',b:'#e7f0f8'},
-  {e:'🎨',c:'塗り絵',b:'#f2e9f5'},{e:'🎤',c:'カラオケ',b:'#e4eee7'}
+  {e:'🎋',b:'#e7f0f8'},{e:'🍱',b:'#fbeedc'},{e:'🌻',b:'#e4eee7'},{e:'🎂',b:'#f7e6ec'},
+  {e:'🫖',b:'#efe8dc'},{e:'🚶',b:'#e7f0f8'},{e:'🎨',b:'#f2e9f5'},{e:'🎤',b:'#e4eee7'}
 ];
 const el = id => document.getElementById(id);
 let sel = new Set([0,1]);
-
 function draw(){
   el('pics').innerHTML = PICS.map((p,i)=>`
     <div class="pic ${sel.has(i)?'on':''}" data-i="${i}" style="background:${p.b}">
-      ${p.e}<span class="ck">✓</span><span class="cap">${p.c}</span></div>`).join('');
+      ${p.e}<span class="ck">✓</span></div>`).join('');
   document.querySelectorAll('.pic').forEach(p=>p.onclick=()=>{
     const i = +p.dataset.i;
     sel.has(i) ? sel.delete(i) : sel.add(i);
@@ -182,21 +144,18 @@ function draw(){
   });
 }
 draw();
-
 el('send').onclick = () => {
-  if (!sel.size) { alert('写真を1枚以上選んでください。'); return; }
+  if (!sel.size) { alert('写真を選んでください。'); return; }
   el('send').disabled = true;
-  el('smsg').innerHTML = '<span class="spin"></span> 配信中…';
+  el('smsg').innerHTML = '<span class="spin"></span> 送っています…';
   setTimeout(()=>{
     const imgs = [...sel].map(i=>`<div style="background:${PICS[i].b}">${PICS[i].e}</div>`).join('');
     const d = document.createElement('div');
     d.className = 'lmsg fu';
-    d.innerHTML = `<div class="ph">${imgs}</div>${el('tmpl').value}
-      <div style="margin-top:8px;padding-top:7px;border-top:1px dashed #e2ddd5;font-size:11px;color:#78838f">
-      ○○ホーム　${new Date().getMonth()+1}月${new Date().getDate()}日</div>`;
+    d.innerHTML = `<div class="ph">${imgs}</div>${el('tmpl').value}`;
     el('lbody').appendChild(d);
     el('lbody').scrollTop = el('lbody').scrollHeight;
-    el('smsg').textContent = '✓ ' + el('to').value.replace(/（.*/,'') + 'へ配信しました（デモのため実際には送信していません）';
+    el('smsg').innerHTML = '<span style="color:var(--gd);font-weight:800">✓ 48世帯へ送りました</span>';
     el('send').disabled = false;
   }, 1100);
 };
