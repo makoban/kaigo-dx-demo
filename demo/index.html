@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>介護のDX　できることデモ</title>
+<meta name="description" content="介護施設のDXでできること。介護記録の読み取り、議事録の自動要約、空室管理、給与計算など8つのツールを実際に触れるデモでご紹介します。">
+<meta property="og:title" content="介護のDX　できることデモ">
+<meta property="og:description" content="8つとも実際に動きます。手書き記録の読み取りから、空室と待機者の照合まで。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+<link rel="stylesheet" href="assets/demo.css">
+<style>
+.hero{background:linear-gradient(160deg,#14324d,#2b5c8a 60%,#3d7fa8);color:#fff;padding:46px 0 42px}
+.hero .in{max-width:1140px;margin:0 auto;padding:0 18px}
+.hero h1{margin:0 0 13px;font-size:clamp(25px,4.6vw,38px);font-weight:800;line-height:1.4}
+.hero p{margin:0;font-size:clamp(14.5px,2vw,17px);opacity:.94;max-width:44em;line-height:1.85}
+.hero .t{display:inline-block;background:rgba(255,255,255,.2);font-size:11.5px;font-weight:700;
+  letter-spacing:.14em;padding:4px 13px;border-radius:99px;margin-bottom:14px}
+.wrap{max-width:1140px}
+.grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1080px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:.17s;height:100%}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(24,34,44,.15);border-color:var(--ac)}
+.shot{position:relative;background:var(--head);aspect-ratio:900/608;overflow:hidden;border-bottom:1px solid var(--line)}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.shot::after{content:"▶ 触ってみる";position:absolute;inset:0;background:rgba(29,66,101,.82);color:#fff;
+  display:grid;place-items:center;font-size:17px;font-weight:800;opacity:0;transition:.17s;letter-spacing:.05em}
+.card:hover .shot::after{opacity:1}
+.shot .no{position:absolute;top:9px;left:9px;background:rgba(29,66,101,.92);color:#fff;font-size:10.5px;
+  font-weight:800;letter-spacing:.1em;padding:4px 10px;border-radius:99px;z-index:2}
+.bd{padding:18px 19px 19px;flex:1;display:flex;flex-direction:column}
+.bd h3{margin:0 0 9px;font-size:18px;font-weight:800;line-height:1.5}
+.bd .p{background:var(--head);border-radius:8px;padding:9px 11px;font-size:12.5px;color:var(--soft);
+  line-height:1.7;margin:0 0 10px}
+.bd .p b{color:#8a5a34}
+.bd .d{font-size:13.5px;line-height:1.75;margin:0 0 13px;color:var(--soft)}
+.bd .go{margin-top:auto;font-weight:800;color:var(--ac);font-size:14.5px}
+.card.g{border-top:4px solid var(--gd)} .card.g .go{color:var(--gd)} .card.g .shot::after{background:rgba(47,111,79,.85)}
+.card.w{border-top:4px solid var(--wn)} .card.w .go{color:var(--wn)} .card.w .shot::after{background:rgba(179,84,30,.85)}
+.card.a{border-top:4px solid var(--ac)}
+.more{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+.more h3{margin:0 0 10px;font-size:19px;font-weight:800}
+.more p{margin:0 0 16px;color:var(--soft)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="in">
+    <span class="t">DEMO ／ 8つとも実際に動きます</span>
+    <h1>介護のDXで、こんなことができます</h1>
+    <p>説明より、触っていただくほうが早いと思います。画像を押すと、そのまま操作できる画面が開きます。<br>
+    スマホでもタブレットでも動きます。登場する氏名・数値はすべて架空のサンプルです。</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="lead">
+    <b>見ていただきたいのは「現場の人が、何回操作すれば終わるか」です。</b>
+    介護の現場はPCの前に座る時間がありません。写真を撮る、ボタンを押す、タップする。それだけで終わる形になっているかどうかが、続くか続かないかの分かれ目になります。
+  </div>
+
+  <div class="grid">
+
+    <a class="card a" href="kiroku/">
+      <div class="shot"><span class="no">DEMO 01</span><img src="assets/thumb/kiroku.jpg" alt="手書きの介護記録を撮影して構造化された画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>介護記録・診断書の読み取り</h3>
+        <p class="p"><b>いま：</b>手書きの記録を、あとからPCに打ち直している。夜勤明けの職員が30分残って入力。</p>
+        <p class="d">手書きの記録用紙を撮るだけで、バイタルも食事量も自動で構造化。<strong>加算の記録漏れも一覧で分かります。</strong></p>
+        <p class="go">撮って読み取ってみる →</p>
+      </div>
+    </a>
+
+    <a class="card g" href="gijiroku/">
+      <div class="shot"><span class="no">DEMO 02</span><img src="assets/thumb/gijiroku.jpg" alt="録音から自動生成された議事録の画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>会議・カンファレンス議事録</h3>
+        <p class="p"><b>いま：</b>議事録づくりに毎回1時間。病歴や家族の事情が入るのでクラウドは怖くて使えない。</p>
+        <p class="d">録音するだけで要約・決定事項・宿題まで自動整理。<strong>処理は施設内で完結し、外に出ません。</strong></p>
+        <p class="go">録音して要約してみる →</p>
+      </div>
+    </a>
+
+    <a class="card w" href="kuushitsu/">
+      <div class="shot"><span class="no">DEMO 03</span><img src="assets/thumb/kuushitsu.jpg" alt="居室グリッドと待機リストが照合された画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>空室・待機リスト・紹介元</h3>
+        <p class="p"><b>いま：</b>空室が出てから慌てて探す。紹介元への連絡が担当者の記憶頼み。</p>
+        <p class="d">空室と待機の方が一目で分かり、<strong>空きが出たら紹介元へ自動連絡。</strong>どこからの紹介が多いかも数字で見えます。</p>
+        <p class="go">空室を出してみる →</p>
+      </div>
+    </a>
+
+    <a class="card a" href="kanri/">
+      <div class="shot"><span class="no">DEMO 04</span><img src="assets/thumb/kanri.jpg" alt="問い合わせから入居までの案件ボード" loading="lazy"></div>
+      <div class="bd">
+        <h3>問い合わせ〜入居の管理</h3>
+        <p class="p"><b>いま：</b>問い合わせがメモ用紙のまま。「あの方どうなった？」が担当者の記憶頼み。</p>
+        <p class="d">問い合わせから入居までを1本の流れで管理。<strong>放置されている案件が赤で浮かび上がります。</strong></p>
+        <p class="go">案件を動かしてみる →</p>
+      </div>
+    </a>
+
+    <a class="card w" href="kyuyo/">
+      <div class="shot"><span class="no">DEMO 05</span><img src="assets/thumb/kyuyo.jpg" alt="給与明細を修正して履歴が残った画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>給与計算（例外に耐える）</h3>
+        <p class="p"><b>いま：</b>夜勤手当、処遇改善加算、変則シフト。市販ソフトははみ出して、結局Excelで手直し。</p>
+        <p class="d">自動計算に人を合わせるのではなく、<strong>その場で直せて、直した理由が履歴に残ります。</strong></p>
+        <p class="go">金額を直してみる →</p>
+      </div>
+    </a>
+
+    <a class="card g" href="kazoku/">
+      <div class="shot"><span class="no">DEMO 06</span><img src="assets/thumb/kazoku.jpg" alt="家族のLINEに写真が配信された画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>ご家族への様子配信・アンケート</h3>
+        <p class="p"><b>いま：</b>「最近どうですか」の電話でそのつど手が止まる。満足度調査は集計する手間がない。</p>
+        <p class="d">写真を選んで送るだけでLINEに配信。<strong>アンケートは集計まで自動</strong>で出ます。</p>
+        <p class="go">配信して集計を見る →</p>
+      </div>
+    </a>
+
+    <a class="card g" href="soudan/">
+      <div class="shot"><span class="no">DEMO 07</span><img src="assets/thumb/soudan.jpg" alt="就業規則に参照元つきで答えるLINE画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>職員のLINE相談窓口</h3>
+        <p class="p"><b>いま：</b>辞める理由は辞めてから分かる。就業規則の質問が管理者に集中する。</p>
+        <p class="d">就業規則はAIが<strong>参照元つきで即答</strong>。言いづらい相談は匿名のまま届きます。</p>
+        <p class="go">LINEで聞いてみる →</p>
+      </div>
+    </a>
+
+    <a class="card a" href="mitsumori/">
+      <div class="shot"><span class="no">DEMO 08</span><img src="assets/thumb/mitsumori.jpg" alt="その場で作成された見積書の画面" loading="lazy"></div>
+      <div class="bd">
+        <h3>ご入居費用の見積もり</h3>
+        <p class="p"><b>いま：</b>「あとで見積もりをお送りします」と言って、その日のうちに決まらない。</p>
+        <p class="d">選ぶだけで<strong>その場で見積書が出ます。</strong>ご家族が帰るときに紙で持って帰れます。</p>
+        <p class="go">見積書を出してみる →</p>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="more">
+    <h3>それぞれの背景と、費用の目安</h3>
+    <p>「なぜ介護のDXは途中で止まるのか」「補助金はどれが使えるのか」を、8つのツールの説明とあわせてまとめた資料があります。</p>
+    <a class="btn" href="../dx/">資料を見る →</a>
+  </div>
+
+  <div class="note">
+    <strong>共通してできること。</strong>
+    どれも既製品をそのまま入れるのではなく、その施設の帳票・料金表・シフトの決まりに合わせて中身を差し替えられます。
+    「うちはこの項目も要る」「この計算だけは別」といった例外を、例外のまま扱える形にできます。
+  </div>
+</div>
+
+<footer class="demo">
+  デモ用のサンプルです。登場する氏名・数値・施設情報はすべて架空のものです。<br>
+  実際の画面・項目は、導入先の運用に合わせて変わります。
+</footer>
+
+</body>
+</html>

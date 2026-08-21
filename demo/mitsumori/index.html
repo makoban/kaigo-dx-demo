@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ご入居費用の見積もり｜デモ</title>
+<style>
+:root{--ink:#1f2933;--soft:#4a5560;--mute:#7b8794;--bg:#f4f1ec;--card:#fff;--line:#e0d9cf;
+  --ac:#2b5c8a;--ac2:#1d4265;--acs:#e8f0f7;--good:#2f6f4f;--goods:#e9f3ee;--warn:#b3541e}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",YuGothic,Meiryo,system-ui,sans-serif;
+  font-size:16px;line-height:1.8;-webkit-text-size-adjust:100%;padding-bottom:150px}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+header{background:linear-gradient(160deg,var(--ac2),var(--ac));color:#fff;padding:26px 0}
+header .demo{display:inline-block;background:rgba(255,255,255,.2);font-size:11.5px;font-weight:700;
+  letter-spacing:.14em;padding:4px 12px;border-radius:99px;margin-bottom:10px}
+header .back{display:inline-block;color:#fff;text-decoration:none;font-size:13px;opacity:.85;
+  border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:4px 11px;margin-bottom:11px}
+header .back:hover{background:rgba(255,255,255,.14)}
+header h1{margin:0 0 6px;font-size:clamp(20px,3.6vw,27px);font-weight:800;line-height:1.45}
+header p{margin:0;font-size:14px;opacity:.9}
+.step{margin:30px 0 0}
+.step>h2{font-size:17px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:11px}
+.step>h2 i{font-style:normal;background:var(--ac);color:#fff;width:27px;height:27px;border-radius:50%;
+  display:grid;place-items:center;font-size:13.5px;flex:none;font-family:Arial,sans-serif}
+.step>.hint{margin:0 0 14px 38px;font-size:13.5px;color:var(--mute)}
+.opts{display:grid;gap:11px}
+@media(min-width:600px){.opts.c2{grid-template-columns:1fr 1fr}.opts.c3{grid-template-columns:repeat(3,1fr)}}
+.opt{position:relative;background:var(--card);border:2px solid var(--line);border-radius:13px;
+  padding:16px 17px;cursor:pointer;transition:.14s;display:block;min-height:66px;
+  -webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:#c3d5e4}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .t{font-weight:700;font-size:16px;line-height:1.5;display:block;padding-right:26px}
+.opt .d{font-size:12.5px;color:var(--mute);line-height:1.65;margin-top:3px;display:block}
+.opt .p{font-size:14px;color:var(--ac);font-weight:700;margin-top:7px;display:block;
+  font-variant-numeric:tabular-nums}
+.opt::after{content:"";position:absolute;top:15px;right:15px;width:21px;height:21px;border-radius:50%;
+  border:2px solid #ccc3b7;background:#fff;transition:.14s}
+.opt:has(input:checked){border-color:var(--ac);background:var(--acs)}
+.opt:has(input:checked)::after{border-color:var(--ac);background:var(--ac);
+  box-shadow:inset 0 0 0 3.5px #fff}
+.opt:has(input[type=checkbox]:checked){border-color:var(--good);background:var(--goods)}
+.opt:has(input[type=checkbox]:checked)::after{border-color:var(--good);background:var(--good);
+  border-radius:6px;box-shadow:none}
+.opt:has(input[type=checkbox])::after{border-radius:6px}
+.opt:has(input[type=checkbox]:checked) .p{color:var(--good)}
+
+/* 合計バー */
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);
+  box-shadow:0 -3px 20px rgba(31,41,51,.09);z-index:20;padding:13px 0 15px}
+.bar .in{max-width:860px;margin:0 auto;padding:0 18px;display:flex;align-items:center;
+  gap:14px;flex-wrap:wrap}
+.bar .l{font-size:12.5px;color:var(--mute);line-height:1.4}
+.bar .v{font-size:clamp(23px,4.6vw,30px);font-weight:800;color:var(--ac2);line-height:1.15;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.bar .v small{font-size:14px;font-weight:700;margin-left:2px}
+.bar .sub{font-size:12.5px;color:var(--mute);margin-top:1px}
+.bar .go{margin-left:auto;background:var(--warn);color:#fff;border:none;border-radius:11px;
+  padding:14px 26px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;
+  transition:.14s;white-space:nowrap}
+.bar .go:hover{background:#96461a}
+@media(max-width:520px){.bar .go{width:100%;margin-left:0}}
+
+/* 見積書 */
+.sheet{display:none;background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:30px 26px;margin:30px 0}
+.sheet.on{display:block}
+.sheet h3{margin:0 0 4px;font-size:21px;font-weight:800;text-align:center;letter-spacing:.1em}
+.sheet .co{text-align:center;font-size:12.5px;color:var(--mute);margin:0 0 22px}
+.sheet table{width:100%;border-collapse:collapse;font-size:14.5px}
+.sheet th,.sheet td{padding:10px 8px;border-bottom:1px solid #ece6dd;text-align:left;line-height:1.6}
+.sheet td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sheet tr.head td{background:#f4f1ec;font-weight:700;font-size:13px;letter-spacing:.05em;
+  border-bottom:1px solid var(--line)}
+.sheet tr.tot td{font-weight:800;font-size:17px;border-top:2px solid var(--ink);border-bottom:none;
+  padding-top:13px;color:var(--ac2)}
+.sheet .fine{font-size:11.5px;color:var(--mute);line-height:1.8;margin:18px 0 0;
+  border-top:1px dashed var(--line);padding-top:14px}
+.acts{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.acts button{flex:1;min-width:130px;border:1px solid var(--ac);background:#fff;color:var(--ac);
+  border-radius:10px;padding:12px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.acts button.pri{background:var(--ac);color:#fff}
+
+.note{background:#fdf1e7;border-left:4px solid var(--warn);border-radius:9px;padding:15px 18px;
+  font-size:13.5px;color:var(--soft);line-height:1.8;margin:26px 0}
+footer{padding:28px 0 20px;font-size:12px;color:var(--mute);line-height:1.8;text-align:center}
+@media print{
+  body{background:#fff;padding:0}
+  header,.step,.bar,.note,.acts,footer{display:none!important}
+  .sheet{border:none;padding:0;margin:0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="back" href="../">← デモ一覧</a>
+    <span class="demo">DEMO ／ 実際に動きます</span>
+    <h1>ご入居費用 かんたん見積もり</h1>
+    <p>選ぶだけで、その場で見積書が出ます。金額はデモ用のサンプルです。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="step">
+    <h2><i>1</i>お部屋のタイプ</h2>
+    <p class="hint">ご希望のお部屋をお選びください</p>
+    <div class="opts c3" id="room"></div>
+  </div>
+
+  <div class="step">
+    <h2><i>2</i>要介護度</h2>
+    <p class="hint">認定をお持ちでない場合は「自立・申請中」をお選びください</p>
+    <div class="opts c3" id="care"></div>
+  </div>
+
+  <div class="step">
+    <h2><i>3</i>お食事</h2>
+    <p class="hint">あとから変更できます</p>
+    <div class="opts c3" id="meal"></div>
+  </div>
+
+  <div class="step">
+    <h2><i>4</i>オプション（複数選べます）</h2>
+    <p class="hint">必要なものだけお選びください</p>
+    <div class="opts c2" id="opt"></div>
+  </div>
+
+  <div class="note">
+    <strong>これはデモです。</strong>金額・項目はサンプルであり、特定の施設の料金ではありません。
+    実際に導入する場合は、その施設の料金表・加算・キャンペーンをそのまま反映し、
+    「よく出る組み合わせ」をボタン1つで呼び出せるようにするなど、現場の使い方に合わせられます。
+  </div>
+
+  <div class="sheet" id="sheet">
+    <h3>御 見 積 書</h3>
+    <p class="co">サンプル介護施設　御中（デモ用の架空施設です）</p>
+    <table id="lines"></table>
+    <p class="fine">
+      ※本見積書はデモ用のサンプルです。実際の費用ではありません。<br>
+      ※介護サービス費は自己負担1割として試算しています。負担割合により変わります。<br>
+      ※医療費・おむつ代・理美容代・日用品などの実費は含みません。<br>
+      ※食費は1か月30日として計算しています。
+    </p>
+    <div class="acts">
+      <button class="pri" onclick="window.print()">この見積書を印刷／PDFで保存</button>
+      <button onclick="document.getElementById('sheet').classList.remove('on');window.scrollTo({top:0,behavior:'smooth'})">条件を選び直す</button>
+    </div>
+  </div>
+
+  <footer>
+    デモ用のサンプルです。金額・施設情報はすべて架空のものです。<br>
+    実際の料金項目は、施設の料金表に合わせて設定します。
+  </footer>
+</div>
+
+<div class="bar">
+  <div class="in">
+    <div>
+      <div class="l">月額のお支払い（概算）</div>
+      <div class="v" id="total">—</div>
+      <div class="sub" id="init">ご入居時の初期費用：—</div>
+    </div>
+    <button class="go" onclick="makeSheet()">見積書をつくる</button>
+  </div>
+</div>
+
+<script>
+const DATA = {
+  room:[
+    {id:'a',t:'一般居室',d:'約31㎡・トイレ／洗面付き',p:135000,dep:4},
+    {id:'b',t:'広めの居室',d:'約35㎡・浴室付き',p:150000,dep:4},
+    {id:'c',t:'二人部屋',d:'約45㎡・ご夫婦向け',p:180000,dep:4}
+  ],
+  care:[
+    {id:'n',t:'自立・申請中',d:'介護保険の利用なし',p:0},
+    {id:'s1',t:'要支援1',d:'',p:5000},
+    {id:'s2',t:'要支援2',d:'',p:10500},
+    {id:'k1',t:'要介護1',d:'',p:16800},
+    {id:'k2',t:'要介護2',d:'',p:19700},
+    {id:'k3',t:'要介護3',d:'',p:27100},
+    {id:'k4',t:'要介護4',d:'',p:30900},
+    {id:'k5',t:'要介護5',d:'',p:36200}
+  ],
+  meal:[
+    {id:'m3',t:'1日3食',d:'朝700／昼700／夕800円',p:66000},
+    {id:'m2',t:'1日2食',d:'朝・夕',p:45000},
+    {id:'m0',t:'つけない',d:'ご自身で用意されます',p:0}
+  ],
+  opt:[
+    {id:'o1',t:'通院の付き添い',d:'月2回まで',p:6000},
+    {id:'o2',t:'家事支援',d:'掃除・洗濯・調理',p:3000},
+    {id:'o3',t:'健康維持増進プログラム',d:'体操・リハビリ',p:6000},
+    {id:'o4',t:'ご家族への様子配信',d:'LINEで写真つき',p:2000}
+  ],
+  fixed:[
+    {t:'管理費（共益費）',d:'共用部の維持・光熱',p:60000},
+    {t:'生活支援サービス費',d:'24時間の安否確認・生活相談',p:33000}
+  ]
+};
+const yen = n => n.toLocaleString('ja-JP');
+
+function render(key, type){
+  const box = document.getElementById(key);
+  box.innerHTML = DATA[key].map((o,i)=>`
+    <label class="opt">
+      <input type="${type}" name="${key}" value="${o.id}" ${type==='radio'&&i===0?'checked':''}>
+      <span class="t">${o.t}</span>
+      ${o.d?`<span class="d">${o.d}</span>`:''}
+      <span class="p">${o.p?(type==='checkbox'?'＋':'')+ '月額 ' + yen(o.p)+'円':'0円'}</span>
+    </label>`).join('');
+  box.addEventListener('change', calc);
+}
+['room','care','meal'].forEach(k=>render(k,'radio'));
+render('opt','checkbox');
+
+function picked(){
+  const one = k => DATA[k].find(o=>o.id===(document.querySelector(`input[name=${k}]:checked`)||{}).value);
+  const many = [...document.querySelectorAll('input[name=opt]:checked')]
+    .map(el=>DATA.opt.find(o=>o.id===el.value));
+  return {room:one('room'), care:one('care'), meal:one('meal'), opts:many};
+}
+function calc(){
+  const p = picked();
+  if(!p.room) return;
+  const fixed = DATA.fixed.reduce((s,f)=>s+f.p,0);
+  const optSum = p.opts.reduce((s,o)=>s+o.p,0);
+  const total = p.room.p + fixed + (p.meal?p.meal.p:0) + (p.care?p.care.p:0) + optSum;
+  document.getElementById('total').innerHTML = yen(total)+'<small>円</small>';
+  document.getElementById('init').textContent =
+    'ご入居時の初期費用（敷金 家賃'+p.room.dep+'か月分）：'+yen(p.room.p*p.room.dep)+'円';
+}
+function makeSheet(){
+  const p = picked();
+  const rows = [];
+  rows.push(`<tr class="head"><td>項目</td><td>内容</td><td class="n">月額</td></tr>`);
+  rows.push(`<tr><td>家賃</td><td>${p.room.t}（${p.room.d}）</td><td class="n">${yen(p.room.p)}円</td></tr>`);
+  DATA.fixed.forEach(f=>rows.push(`<tr><td>${f.t}</td><td>${f.d}</td><td class="n">${yen(f.p)}円</td></tr>`));
+  if(p.meal&&p.meal.p) rows.push(`<tr><td>食費</td><td>${p.meal.t}</td><td class="n">${yen(p.meal.p)}円</td></tr>`);
+  if(p.care&&p.care.p) rows.push(`<tr><td>介護サービス費</td><td>${p.care.t}（自己負担1割）</td><td class="n">${yen(p.care.p)}円</td></tr>`);
+  p.opts.forEach(o=>rows.push(`<tr><td>オプション</td><td>${o.t}</td><td class="n">${yen(o.p)}円</td></tr>`));
+  const fixed = DATA.fixed.reduce((s,f)=>s+f.p,0);
+  const total = p.room.p+fixed+(p.meal?p.meal.p:0)+(p.care?p.care.p:0)+p.opts.reduce((s,o)=>s+o.p,0);
+  rows.push(`<tr class="tot"><td colspan="2">月額 合計</td><td class="n">${yen(total)}円</td></tr>`);
+  rows.push(`<tr class="head"><td colspan="3" style="padding-top:16px">ご入居時のお支払い</td></tr>`);
+  rows.push(`<tr><td>敷金</td><td>家賃${p.room.dep}か月分（退去時に精算）</td><td class="n">${yen(p.room.p*p.room.dep)}円</td></tr>`);
+  rows.push(`<tr class="tot"><td colspan="2">初期費用 合計</td><td class="n">${yen(p.room.p*p.room.dep)}円</td></tr>`);
+  document.getElementById('lines').innerHTML = rows.join('');
+  const s = document.getElementById('sheet');
+  s.classList.add('on');
+  s.scrollIntoView({behavior:'smooth',block:'start'});
+}
+calc();
+</script>
+</body>
+</html>

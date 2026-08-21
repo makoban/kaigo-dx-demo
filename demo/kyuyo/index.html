@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>給与計算（例外に耐える）｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.pay td.amt{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;font-weight:700}
+.pay tr.edited td{background:var(--wns)}
+.pay tr.total td{border-top:2px solid var(--ink);font-size:17px;font-weight:800;color:var(--ac2);
+  background:var(--acs)}
+.editable{cursor:pointer;position:relative;border-bottom:1.5px dashed var(--ac)}
+.editable:hover{background:var(--acs)}
+.pen{font-size:11px;color:var(--ac);margin-left:5px}
+.hist{border-left:2px solid var(--wn);padding-left:14px;margin-left:4px}
+.hist .h{position:relative;padding-bottom:13px}
+.hist .h::before{content:"";position:absolute;left:-19px;top:6px;width:8px;height:8px;border-radius:50%;
+  background:var(--wn);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--wn)}
+.hist .d{font-size:11.5px;color:var(--mute);font-weight:700}
+.hist .t{font-size:13.5px;line-height:1.7;margin-top:1px}
+.hist .t b{color:var(--wn)}
+.dlg{position:fixed;inset:0;background:rgba(24,34,44,.5);display:grid;place-items:center;padding:18px;z-index:50}
+.dlg .bx{background:#fff;border-radius:14px;max-width:460px;width:100%}
+.dlg .hd{padding:16px 20px;border-bottom:1px solid var(--line)}
+.dlg .hd h3{margin:0;font-size:17px;font-weight:800}
+.dlg .bd{padding:20px}
+.shift{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px}
+.shift .dh{text-align:center;font-weight:800;color:var(--mute);font-size:10.5px;padding:3px 0}
+.shift .c{aspect-ratio:1;border-radius:6px;display:grid;place-items:center;font-weight:700;line-height:1.2}
+.shift .c.n{background:#dbe6f2;color:#1d4265}
+.shift .c.d{background:#fbeedc;color:#8a5a34}
+.shift .c.e{background:#e4eee7;color:#255a40}
+.shift .c.o{background:var(--head);color:#c3bdb3}
+.lg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--soft);margin-top:9px}
+.lg i{width:12px;height:12px;border-radius:4px;display:inline-block;vertical-align:-2px;margin-right:4px}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="in">
+    <a class="back" href="../">← デモ一覧</a>
+    <h1>給与計算（例外に耐える設計）</h1>
+    <span class="tagdemo">DEMO</span>
+    <p class="sub">自動計算に人を合わせるのではなく、人の判断をシステムが記録します</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>介護の給与計算は例外だらけです。</b>
+    夜勤明けの端数、急な代替出勤、処遇改善加算の配分、非常勤の変則シフト。
+    市販ソフトは必ずどこかではみ出して、結局Excelで手直しすることになります。
+    <b>大事なのは「直せること」と「直した理由が残ること」です。</b>
+    <span class="try">▼ 青い点線の金額を押すと、その場で修正できます。</span>
+  </div>
+
+  <div class="cols c32">
+
+    <div class="panel">
+      <h2>給与明細<span class="r">2026年8月分／佐藤 ミカ（介護福祉士・常勤）</span></h2>
+      <div class="pad">
+        <div class="tw">
+          <table class="pay" id="tbl">
+            <thead><tr><th style="width:40%">項目</th><th>内訳</th><th class="n">金額</th></tr></thead>
+            <tbody id="tb"></tbody>
+          </table>
+        </div>
+        <p class="fine">※青い点線の項目は、その場で修正できます。修正すると理由の入力を求められ、履歴に残ります。</p>
+
+        <div class="note w" id="exnote">
+          <b>この明細には、市販ソフトでは処理しきれない例外が2つ含まれています。</b><br>
+          ① 8/13の夜勤は、他職員の急な欠勤による代替出勤（通常と手当額が異なる）<br>
+          ② 処遇改善加算の配分は、施設独自の評価ルール（資格＋勤続年数＋夜勤回数）で決めている
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>8月のシフト<span class="r">夜勤5回</span></h2>
+        <div class="pad">
+          <div class="shift" id="cal"></div>
+          <div class="lg">
+            <span><i style="background:#fbeedc"></i>日勤</span>
+            <span><i style="background:#dbe6f2"></i>夜勤</span>
+            <span><i style="background:#e4eee7"></i>早番/遅番</span>
+            <span><i style="background:#f7f5f1"></i>休</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>修正履歴<span class="r" id="hcount">0件</span></h2>
+        <div class="pad">
+          <div id="hist"><p style="color:var(--mute);font-size:13.5px;margin:0">
+            まだ修正はありません。左の金額を押して直してみてください。</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h2>なぜ「履歴が残ること」が大事なのか</h2>
+    <div class="pad">
+      <div class="cols c2">
+        <div>
+          <h4 style="margin:0 0 8px;font-size:15.5px">① 労基署の調査・監査に耐えられる</h4>
+          <p style="margin:0 0 16px">「なぜこの月だけ手当が違うのか」を聞かれたとき、<strong>いつ・誰が・なぜ直したかがその場で出せます。</strong>
+          Excelで手直ししていると、この説明ができません。</p>
+          <h4 style="margin:0 0 8px;font-size:15.5px">② 担当者が代わっても引き継げる</h4>
+          <p style="margin:0">給与計算は担当者の頭の中にルールが溜まりがちです。修正理由が残っていれば、
+          <strong>「この施設の決まりごと」が自然にドキュメントになります。</strong></p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 8px;font-size:15.5px">③ 職員から聞かれたときに即答できる</h4>
+          <p style="margin:0 0 16px">「先月と金額が違うのですが」に、その場で根拠を示して答えられます。
+          <strong>給与の不透明さは、離職の理由になります。</strong></p>
+          <div class="note g" style="margin-bottom:0">
+            <b>よくある誤解：</b>「システムを入れたら例外が扱えなくなる」<br>
+            そうではなく、<b>例外を例外のまま、安全に扱えるようにする</b>のが目的です。
+            自動化するのは計算そのものではなく、<b>転記と記録</b>です。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dlg hide" id="dlg">
+  <div class="bx">
+    <div class="hd"><h3 id="dt"></h3></div>
+    <div class="bd">
+      <div class="fg"><label class="fl">現在の金額</label>
+        <div style="font-size:20px;font-weight:800;color:var(--mute)" id="dold"></div></div>
+      <div class="fg"><label class="fl">修正後の金額（円）</label>
+        <input type="text" id="dnew" inputmode="numeric"></div>
+      <div class="fg"><label class="fl">修正の理由（必須・履歴に残ります）</label>
+        <select id="dre">
+          <option value="">選んでください</option>
+          <option>他職員の欠勤による代替出勤のため、手当額を調整</option>
+          <option>施設独自の評価ルールにもとづく配分</option>
+          <option>シフト変更の反映漏れを訂正</option>
+          <option>前月の計算誤りを当月で精算</option>
+          <option>本人からの申し出により確認のうえ訂正</option>
+        </select></div>
+      <div class="btnrow">
+        <button class="btn w" id="dok">この内容で修正する</button>
+        <button class="btn o" onclick="closeDlg()">やめる</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="demo">
+  デモ用のサンプルです。登場する氏名・金額・計算ルールはすべて架空のものです。<br>
+  実際の手当区分・加算の配分ルールは、施設の給与規程に合わせて設定します。
+</footer>
+
+<script>
+let ROWS = [
+  {id:'k',  n:'基本給',              d:'月給制',                        v:218000, e:false},
+  {id:'sk', n:'資格手当',            d:'介護福祉士',                    v:15000,  e:false},
+  {id:'ya', n:'夜勤手当',            d:'8,000円 × 5回',                 v:40000,  e:true},
+  {id:'da', n:'　うち 8/13 代替出勤',d:'急な欠勤対応・割増',            v:3000,   e:true},
+  {id:'sy', n:'処遇改善加算',        d:'施設独自の配分ルール',          v:26500,  e:true},
+  {id:'tk', n:'特定処遇改善加算',    d:'経験・技能のある介護職員',      v:12000,  e:true},
+  {id:'zn', n:'時間外手当',          d:'6.5時間',                       v:11200,  e:true},
+  {id:'ts', n:'通勤手当',            d:'非課税',                        v:8600,   e:false}
+];
+const SHIFT = ['','','','','','日','休','夜','明','休','日','早','遅','日','夜','明','休','日','休','早','夜','明','休','日','遅','日','夜','明','休','日','夜','明'];
+const el = id => document.getElementById(id);
+const yen = n => n.toLocaleString('ja-JP');
+let hist = [], target = null;
+
+function render(){
+  el('tb').innerHTML = ROWS.map(r=>`
+    <tr class="${r.mod?'edited':''}">
+      <td>${r.n}${r.mod?' <span class="b wn">修正済</span>':''}</td>
+      <td style="font-size:13px;color:var(--mute)">${r.d}</td>
+      <td class="amt">${r.e
+        ? `<span class="editable" data-id="${r.id}">${yen(r.v)}円<span class="pen">✎</span></span>`
+        : yen(r.v)+'円'}</td>
+    </tr>`).join('') +
+    `<tr class="total"><td colspan="2">支給額 合計</td>
+     <td class="amt">${yen(ROWS.reduce((s,r)=>s+r.v,0))}円</td></tr>`;
+  document.querySelectorAll('.editable').forEach(x=>x.onclick = ()=>openDlg(x.dataset.id));
+}
+function openDlg(id){
+  target = ROWS.find(r=>r.id===id);
+  el('dt').textContent = target.n + ' を修正';
+  el('dold').textContent = yen(target.v) + '円';
+  el('dnew').value = target.v;
+  el('dre').value = '';
+  el('dlg').classList.remove('hide');
+  setTimeout(()=>el('dnew').select(), 60);
+}
+function closeDlg(){ el('dlg').classList.add('hide'); }
+
+el('dok').onclick = () => {
+  const nv = parseInt(String(el('dnew').value).replace(/[^0-9-]/g,''), 10);
+  const re = el('dre').value;
+  if (isNaN(nv)) { alert('金額を数字で入力してください。'); return; }
+  if (!re) { alert('修正の理由を選んでください。\n\n理由の入力を必須にすることで、あとから説明できる記録になります。'); return; }
+  const old = target.v;
+  target.v = nv; target.mod = true;
+  hist.unshift({n:target.n, o:old, v:nv, r:re});
+  render(); renderHist(); closeDlg();
+};
+
+function renderHist(){
+  el('hcount').textContent = hist.length + '件';
+  if(!hist.length) return;
+  el('hist').innerHTML = '<div class="hist">' + hist.map(h=>`
+    <div class="h fu"><div class="d">2026/08/21 　佐藤（給与担当）</div>
+    <div class="t"><b>${h.n}</b>　${yen(h.o)}円 → <b>${yen(h.v)}円</b><br>
+    理由：${h.r}</div></div>`).join('') + '</div>' +
+    '<div class="note g" style="margin-bottom:0"><b>この履歴がそのまま根拠資料になります。</b>労基署の調査でも、職員からの質問でも、その場で示せます。</div>';
+}
+
+// シフトカレンダー
+const DH = ['日','月','火','水','木','金','土'];
+const map = {'日':'d','夜':'n','明':'n','早':'e','遅':'e','休':'o','':'o'};
+el('cal').innerHTML = DH.map(d=>`<div class="dh">${d}</div>`).join('') +
+  SHIFT.map(s=>`<div class="c ${map[s]||'o'}">${s}</div>`).join('');
+
+render();
+el('dlg').onclick = e => { if(e.target.id==='dlg') closeDlg(); };
+</script>
+</body>
+</html>

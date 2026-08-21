@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>問い合わせ〜入居の管理｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.board{display:grid;grid-template-columns:repeat(5,minmax(184px,1fr));gap:11px;min-width:960px}
+.boardwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+.col{background:var(--head);border:1px solid var(--line);border-radius:11px;padding:10px;min-height:300px}
+.col h3{margin:0 0 9px;font-size:12.5px;font-weight:800;letter-spacing:.05em;display:flex;
+  align-items:center;gap:7px;color:var(--soft)}
+.col h3 .c{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:0 8px;
+  font-size:11.5px;margin-left:auto}
+.crd{background:#fff;border:1px solid var(--line);border-left:3px solid var(--ac);border-radius:9px;
+  padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:.13s;-webkit-tap-highlight-color:transparent}
+.crd:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(24,34,44,.1)}
+.crd.old{border-left-color:var(--dg);background:var(--dgs)}
+.crd.warn{border-left-color:var(--wn);background:var(--wns)}
+.crd .nm{font-weight:800;font-size:14.5px;line-height:1.5}
+.crd .mt{font-size:11.5px;color:var(--mute);line-height:1.65;margin-top:3px}
+.crd .ago{font-size:11px;font-weight:700;margin-top:6px}
+.crd.old .ago{color:var(--dg)} .crd.warn .ago{color:var(--wn)} .ago{color:var(--mute)}
+.dlg{position:fixed;inset:0;background:rgba(24,34,44,.5);display:grid;place-items:center;padding:18px;z-index:50}
+.dlg .bx{background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:86vh;overflow-y:auto}
+.dlg .hd{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.dlg .hd h3{margin:0;font-size:18px;font-weight:800}
+.dlg .hd button{margin-left:auto;border:none;background:var(--head);width:30px;height:30px;border-radius:8px;
+  font-size:15px;cursor:pointer;color:var(--soft)}
+.dlg .bd{padding:20px}
+.tl{border-left:2px solid var(--line);padding-left:16px;margin-left:5px}
+.tl .ev{position:relative;padding-bottom:14px}
+.tl .ev::before{content:"";position:absolute;left:-21px;top:5px;width:9px;height:9px;border-radius:50%;
+  background:var(--ac);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--ac)}
+.tl .d{font-size:11.5px;color:var(--mute);font-weight:700}
+.tl .t{font-size:14px;line-height:1.7;margin-top:1px}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="in">
+    <a class="back" href="../">← デモ一覧</a>
+    <h1>問い合わせ〜入居の管理</h1>
+    <span class="tagdemo">DEMO</span>
+    <p class="sub">放置されている案件が、赤で浮かび上がります</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>いちばん多い機会損失は「見学に来られたきり、こちらから連絡していない方」です。</b>
+    メモ用紙と記憶で管理していると、この方たちは静かに消えていきます。
+    <span class="try">▼ カードを押すと詳細が出ます。赤いカードが「止まっている案件」です。</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">10<small>件</small></div><div class="l">進行中の案件</div></div>
+    <div class="kpi dg"><div class="n">3<small>件</small></div><div class="l">14日以上 動きなし</div></div>
+    <div class="kpi wn"><div class="n">1<small>件</small></div><div class="l">7日以上 動きなし</div></div>
+    <div class="kpi gd"><div class="n">2<small>件</small></div><div class="l">今月の入居</div></div>
+    <div class="kpi"><div class="n">21<small>%</small></div><div class="l">問い合わせ→入居率</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>案件ボード<span class="r">左から右へ進みます</span></h2>
+    <div class="pad">
+      <div class="boardwrap"><div class="board" id="board"></div></div>
+      <div class="note w" style="margin-bottom:0">
+        <b>赤い3件が、いま取り戻せる売上です。</b>
+        月額13.2万円で計算すると、この3件が決まれば<b>年間475万円</b>。
+        新しく広告を出すより、すでに問い合わせをくださった方に電話するほうが確実です。
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>どこで止まっているかも数字で見えます<span class="r">今年度の累計</span></h2>
+    <div class="pad">
+      <div class="tw">
+        <table>
+          <thead><tr><th>段階</th><th class="n">件数</th><th class="n">次へ進んだ率</th><th>平均滞留</th><th>読み取れること</th></tr></thead>
+          <tbody>
+            <tr><td>問い合わせ</td><td class="n">14</td><td class="n">79%</td><td>2日</td><td>電話対応は早い</td></tr>
+            <tr><td>見学</td><td class="n">11</td><td class="n">55%</td><td>4日</td><td>見学の満足度は高い</td></tr>
+            <tr class="al"><td><b>仮申込</b></td><td class="n">6</td><td class="n"><b>50%</b></td><td><b>18日</b></td><td><b>ここが最大の詰まり。</b>ご家族が費用を持ち帰って検討する段階で止まっている</td></tr>
+            <tr><td>契約</td><td class="n">3</td><td class="n">100%</td><td>5日</td><td>契約まで来れば確実</td></tr>
+            <tr><td>入居</td><td class="n">3</td><td class="n">—</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note g" style="margin-bottom:0">
+        <b>「仮申込で18日止まる」が分かれば、打ち手は具体的になります。</b>
+        見学の当日にその場で見積書をお渡しできれば、この18日は縮みます。
+        （<a href="../mitsumori/">見積もりのデモはこちら</a>）
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="dlg hide" id="dlg">
+  <div class="bx">
+    <div class="hd"><h3 id="dnm"></h3><span id="dbadge"></span><button onclick="document.getElementById('dlg').classList.add('hide')">✕</button></div>
+    <div class="bd" id="dbd"></div>
+  </div>
+</div>
+
+<footer class="demo">
+  デモ用のサンプルです。登場する氏名・数値・医療機関名はすべて架空のものです。
+</footer>
+
+<script>
+const STAGES = [
+  {k:'問い合わせ', ic:'☎'}, {k:'見学', ic:'🏠'}, {k:'仮申込', ic:'📝'},
+  {k:'契約', ic:'🔑'}, {k:'入居', ic:'✓'}
+];
+const CARDS = [
+  {s:0,n:'吉田 ノブコ 様',c:'要介護2',src:'ホームページ',d:1,who:'ご長女',
+   log:[['8/20','ホームページの問い合わせフォームから受付'],['8/20','折り返しの電話。見学の日程を8/24で仮押さえ']]},
+  {s:0,n:'加藤 マサヨ 様',c:'要介護3',src:'□□総合病院',d:3,who:'ご長男',
+   log:[['8/18','病院の地域連携室より紹介の連絡'],['8/18','退院は9月上旬予定。医療処置の確認を依頼']]},
+  {s:0,n:'黒田 シゲ 様',c:'要支援2',src:'チラシ',d:9,who:'ご本人',
+   log:[['8/12','チラシを見てお電話。費用のみお伝えした'],['—','その後、こちらからの連絡なし']]},
+  {s:1,n:'斉藤 タカシ 様',c:'要介護4',src:'ケアプランセンターあおば',d:2,who:'ケアマネ経由',
+   log:[['8/15','ケアマネさんより紹介'],['8/19','ご家族と見学。居室と食事を確認'],['8/19','見積書をお渡し。検討いただく']]},
+  {s:1,n:'柴田 ウメ 様',c:'要介護1',src:'ホームページ',d:22,who:'ご次女',
+   log:[['7/26','問い合わせ'],['7/30','ご家族2名で見学。反応は良好'],['—','以降、連絡が途切れている']]},
+  {s:1,n:'宮本 コウ 様',c:'要介護3',src:'○○内科クリニック',d:5,who:'ご長男',
+   log:[['8/09','クリニックより紹介'],['8/16','見学。他施設とも比較検討中とのこと']]},
+  {s:2,n:'岩崎 ハツ 様',c:'要介護2',src:'□□総合病院',d:4,who:'ご長女',
+   log:[['8/01','病院より紹介'],['8/06','見学'],['8/17','仮申込。契約書類の準備中']]},
+  {s:2,n:'野口 タツオ 様',c:'要介護4',src:'居宅こもれび',d:26,who:'ご姪',
+   log:[['7/15','紹介'],['7/20','見学'],['7/26','仮申込。費用を持ち帰って検討'],['—','1か月動きなし']]},
+  {s:2,n:'河合 ヨネ 様',c:'要介護3',src:'ホームページ',d:16,who:'ご長男',
+   log:[['7/29','問い合わせ'],['8/03','見学'],['8/05','仮申込'],['—','ご家族内で意見が割れている様子']]},
+  {s:3,n:'水野 サブロウ 様',c:'要介護3',src:'ケアプランセンターあおば',d:2,who:'ご長女',
+   log:[['8/02','紹介'],['8/07','見学'],['8/12','仮申込'],['8/19','契約。入居は8/28予定']]},
+  {s:4,n:'高木 セツ 様',c:'要介護3',src:'□□総合病院',d:0,who:'ご長男',
+   log:[['7/20','紹介'],['7/25','見学'],['7/28','仮申込'],['8/05','契約'],['8/12','ご入居（107号室）']]},
+  {s:4,n:'新井 マサオ 様',c:'要介護4',src:'ケアプランセンターあおば',d:0,who:'ご長女',
+   log:[['7/10','紹介'],['7/18','見学'],['7/22','仮申込'],['8/01','契約'],['8/08','ご入居（204号室）']]}
+];
+const el = id => document.getElementById(id);
+const cls = d => d>=14 ? 'old' : (d>=7 ? 'warn' : '');
+const agoTx = d => d===0 ? '完了' : (d>=14 ? `⚠ ${d}日 動きなし` : (d>=7 ? `${d}日 動きなし` : `${d}日前に更新`));
+
+el('board').innerHTML = STAGES.map((st,i)=>{
+  const list = CARDS.filter(c=>c.s===i);
+  return `<div class="col"><h3>${st.ic} ${st.k}<span class="c">${list.length}</span></h3>
+    ${list.map(c=>`<div class="crd ${cls(c.d)}" data-n="${c.n}">
+      <div class="nm">${c.n}</div>
+      <div class="mt">${c.c}／${c.who}<br>${c.src}</div>
+      <div class="ago">${agoTx(c.d)}</div></div>`).join('')}</div>`;
+}).join('');
+
+document.querySelectorAll('.crd').forEach(cd=>{
+  cd.onclick = () => {
+    const c = CARDS.find(x=>x.n===cd.dataset.n);
+    el('dnm').textContent = c.n;
+    el('dbadge').innerHTML = c.d>=14 ? '<span class="b dg">要フォロー</span>'
+      : (c.d>=7 ? '<span class="b wn">確認</span>' : '<span class="b gd">進行中</span>');
+    const advice = c.d>=14
+      ? `<div class="note w" style="margin-top:0"><b>この案件は${c.d}日間 動いていません。</b>
+         ${STAGES[c.s].k}の段階で止まっています。今日ご連絡すれば、まだ間に合う可能性が高い相手です。<br>
+         月額13.2万円で計算すると、決まれば<b>年間158万円</b>の売上になります。</div>`
+      : (c.d>=7 ? `<div class="note" style="margin-top:0">${c.d}日 動きがありません。そろそろ一度ご連絡する頃です。</div>` : '');
+    el('dbd').innerHTML = advice + `
+      <div class="tw" style="margin-bottom:16px"><table><tbody>
+        <tr><th style="width:34%">要介護度</th><td>${c.c}</td></tr>
+        <tr><th>ご相談者</th><td>${c.who}</td></tr>
+        <tr><th>紹介元・きっかけ</th><td>${c.src}</td></tr>
+        <tr><th>現在の段階</th><td>${STAGES[c.s].k}</td></tr>
+      </tbody></table></div>
+      <h4 style="margin:0 0 10px;font-size:14.5px">これまでのやり取り</h4>
+      <div class="tl">${c.log.map(l=>`<div class="ev"><div class="d">${l[0]}</div><div class="t">${l[1]}</div></div>`).join('')}</div>
+      <div class="btnrow" style="margin-top:16px">
+        <button class="btn sm" onclick="alert('デモのため実際には発信しません。\\n\\n実際には、ここから電話・SMS・メールの記録をその場で残せます。')">連絡する</button>
+        <button class="btn o sm" onclick="document.getElementById('dlg').classList.add('hide')">閉じる</button>
+      </div>`;
+    el('dlg').classList.remove('hide');
+  };
+});
+el('dlg').onclick = e => { if(e.target.id==='dlg') el('dlg').classList.add('hide'); };
+</script>
+</body>
+</html>

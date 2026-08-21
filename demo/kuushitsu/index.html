@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>空室・待機リスト・紹介元管理｜デモ</title>
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+.floor{margin-bottom:14px}
+.floor .fl{font-size:12px;font-weight:800;color:var(--mute);letter-spacing:.08em;margin-bottom:6px}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:7px}
+.rm{border-radius:9px;padding:9px 7px;text-align:center;cursor:pointer;border:2px solid transparent;
+  transition:.13s;-webkit-tap-highlight-color:transparent;line-height:1.4}
+.rm .no{font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.rm .nm{font-size:10.5px;margin-top:1px;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm.in{background:#dfe9f2;color:#1d4265}
+.rm.soon{background:#fbe6d3;color:#8a3f16}
+.rm.free{background:#d9ecdf;color:#255a40;border-style:dashed;border-color:#a9cdb8}
+.rm:hover{transform:translateY(-2px);border-color:var(--ac)}
+.rm.sel{border-color:var(--wn);box-shadow:0 0 0 3px var(--wns)}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--soft);margin-bottom:12px}
+.lg i{width:13px;height:13px;border-radius:4px;display:inline-block;vertical-align:-2px;margin-right:5px}
+.wl{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;background:#fff;
+  display:flex;gap:11px;align-items:center}
+.wl .rk{width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:13px;
+  font-weight:800;display:grid;place-items:center;flex:none}
+.wl .in2{flex:1;min-width:0}
+.wl .nm{font-weight:800;font-size:15px;line-height:1.5}
+.wl .mt{font-size:12px;color:var(--mute);line-height:1.6}
+.wl.match{background:var(--gds);border-color:#a9cdb8}
+.bar{height:9px;background:var(--line2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ac);border-radius:99px}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="in">
+    <a class="back" href="../">← デモ一覧</a>
+    <h1>空室・待機リスト・紹介元管理</h1>
+    <span class="tagdemo">DEMO</span>
+    <p class="sub">空きが出た瞬間に、次の方と紹介元へつながります</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="lead">
+    <b>空室1室あたりの損失は、月額13万円なら年間156万円です。</b>
+    退去が決まってから探し始めると、どうしても空白期間ができます。
+    待機の方と紹介元をあらかじめ並べておけば、空いた日から埋められます。
+    <span class="try">▼ 緑の空室、またはオレンジの退去予定を押してみてください。</span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">30<small>室</small></div><div class="l">総居室数</div></div>
+    <div class="kpi gd"><div class="n">27<small>室</small></div><div class="l">入居中</div></div>
+    <div class="kpi wn"><div class="n">2<small>室</small></div><div class="l">退去予定</div></div>
+    <div class="kpi dg"><div class="n">1<small>室</small></div><div class="l">空室</div></div>
+    <div class="kpi"><div class="n">90<small>%</small></div><div class="l">入居率</div></div>
+    <div class="kpi gd"><div class="n">7<small>名</small></div><div class="l">待機中</div></div>
+  </div>
+
+  <div class="cols c32">
+
+    <div class="panel">
+      <h2>① 居室の状況<span class="r">2026年8月21日時点</span></h2>
+      <div class="pad">
+        <div class="lg">
+          <span><i style="background:#dfe9f2"></i>入居中</span>
+          <span><i style="background:#fbe6d3"></i>退去予定</span>
+          <span><i style="background:#d9ecdf;border:1.5px dashed #a9cdb8"></i>空室</span>
+        </div>
+        <div id="floors"></div>
+        <div class="note" id="rmInfo" style="margin-bottom:0">居室を押すと、詳しい状況とマッチする待機の方が出ます。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>② 待機リスト<span class="r">7名</span></h2>
+      <div class="pad">
+        <div id="wait"></div>
+        <p class="fine">※ご本人の希望条件（階・要介護度・医療処置・入居希望時期）を登録しておくと、空室と自動で照合されます。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel">
+    <h2>③ 紹介元への自動連絡</h2>
+    <div class="pad">
+      <p style="margin-top:0">空室が確定したら、<strong>紹介元の病院・居宅介護支援事業所へ最新の空室状況を自動でお知らせ</strong>できます。
+      毎回の手作業と「連絡し忘れ」がなくなり、紹介元にとっては「あそこは必ず教えてくれる」という関係になります。</p>
+      <div class="btnrow" style="margin-bottom:14px">
+        <button class="btn g" id="send">空室のお知らせを送る（8件）</button>
+        <span id="sendmsg" style="font-size:13.5px;color:var(--gd);font-weight:700"></span>
+      </div>
+      <div class="tw">
+        <table>
+          <thead><tr><th>紹介元</th><th>種別</th><th class="n">今年度の紹介</th><th class="n">うち入居</th><th style="width:22%">成約率</th><th>最終連絡</th></tr></thead>
+          <tbody>
+            <tr><td><b>□□総合病院</b> 地域連携室</td><td>病院MSW</td><td class="n">9件</td><td class="n">6件</td><td><div class="bar"><i style="width:67%"></i></div><span class="fine">67%</span></td><td>8/14</td></tr>
+            <tr><td><b>ケアプランセンターあおば</b></td><td>居宅介護支援</td><td class="n">7件</td><td class="n">5件</td><td><div class="bar"><i style="width:71%"></i></div><span class="fine">71%</span></td><td>8/18</td></tr>
+            <tr><td><b>○○内科クリニック</b></td><td>診療所</td><td class="n">4件</td><td class="n">3件</td><td><div class="bar"><i style="width:75%"></i></div><span class="fine">75%</span></td><td>8/07</td></tr>
+            <tr class="hi"><td><b>△△リハビリ病院</b> 相談室</td><td>病院MSW</td><td class="n">5件</td><td class="n">1件</td><td><div class="bar"><i style="width:20%;background:var(--wn)"></i></div><span class="fine">20%</span></td><td>6/30</td></tr>
+            <tr><td><b>居宅介護支援事業所こもれび</b></td><td>居宅介護支援</td><td class="n">3件</td><td class="n">2件</td><td><div class="bar"><i style="width:67%"></i></div><span class="fine">67%</span></td><td>8/19</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note w">
+        <b>数字で見ると、打ち手が変わります。</b>
+        △△リハビリ病院は紹介5件に対して入居1件、最終連絡も6月末で止まっています。
+        紹介はいただけているのに決まっていないので、<b>受け入れ条件の伝え方がずれている可能性</b>があります。ここは一度あいさつに伺う相手です。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="demo">
+  デモ用のサンプルです。登場する氏名・施設名・医療機関名・数値はすべて架空のものです。
+</footer>
+
+<script>
+const ROOMS = {
+  '1階':[{n:101,s:'in',w:'佐々木 トヨ'},{n:102,s:'in',w:'大野 ススム'},{n:103,s:'in',w:'池田 ヨシ'},
+         {n:104,s:'in',w:'森 カズオ'},{n:105,s:'in',w:'鈴木 マサル'},{n:106,s:'in',w:'原田 ミネ'},
+         {n:107,s:'free',w:'空室'},{n:108,s:'in',w:'村上 タケ'},{n:109,s:'in',w:'岡田 ハル'},{n:110,s:'in',w:'西村 イサム'}],
+  '2階':[{n:201,s:'in',w:'橋本 サチ'},{n:202,s:'in',w:'石川 ノブ'},{n:203,s:'in',w:'伊藤 タダシ'},
+         {n:204,s:'soon',w:'退去 8/31'},{n:205,s:'in',w:'藤田 スミ'},{n:206,s:'in',w:'中島 ケンジ'},
+         {n:207,s:'in',w:'山口 テル'},{n:208,s:'in',w:'田中 キヨ'},{n:209,s:'in',w:'内田 マサエ'},{n:210,s:'in',w:'松本 ゴロウ'}],
+  '3階':[{n:301,s:'in',w:'木村 チヨ'},{n:302,s:'in',w:'山田 ハナ'},{n:303,s:'in',w:'福田 ジロウ'},
+         {n:304,s:'in',w:'青木 ヤエ'},{n:305,s:'soon',w:'退去 9/10'},{n:306,s:'in',w:'長谷川 ミツ'},
+         {n:307,s:'in',w:'近藤 トシオ'},{n:308,s:'in',w:'坂本 フジ'},{n:309,s:'in',w:'太田 ヒロシ'},{n:310,s:'in',w:'菊地 サワ'}]
+};
+const WAIT = [
+  {r:1,n:'高木 セツ 様',c:'要介護3',w:'1階希望・車椅子',src:'□□総合病院',when:'即時可',fl:1},
+  {r:2,n:'新井 マサオ 様',c:'要介護4',w:'胃ろう・階指定なし',src:'ケアプランセンターあおば',when:'即時可',fl:0},
+  {r:3,n:'白石 ノリコ 様',c:'要介護2',w:'2階以上希望',src:'○○内科クリニック',when:'9月上旬',fl:2},
+  {r:4,n:'関 ユキオ 様',c:'要介護3',w:'在宅酸素',src:'□□総合病院',when:'9月中',fl:0},
+  {r:5,n:'吉川 タエ 様',c:'要支援2',w:'自立度高め',src:'居宅こもれび',when:'10月以降',fl:0},
+  {r:6,n:'南 コウイチ 様',c:'要介護5',w:'たん吸引',src:'△△リハビリ病院',when:'未定',fl:0},
+  {r:7,n:'堀 スエ 様',c:'要介護1',w:'夫婦での入居希望',src:'直接問い合わせ',when:'未定',fl:0}
+];
+const el = id => document.getElementById(id);
+
+el('floors').innerHTML = Object.entries(ROOMS).map(([f,rs])=>`
+  <div class="floor"><div class="fl">${f}</div><div class="rooms">
+  ${rs.map(r=>`<div class="rm ${r.s}" data-n="${r.n}" data-s="${r.s}" data-w="${r.w}" data-f="${f}">
+    <div class="no">${r.n}</div><div class="nm">${r.w}</div></div>`).join('')}
+  </div></div>`).join('');
+
+function renderWait(matchFloor){
+  el('wait').innerHTML = WAIT.map(w=>{
+    const m = matchFloor && (w.fl === matchFloor || w.fl === 0);
+    return `<div class="wl ${m?'match':''}">
+      <span class="rk" ${m?'style="background:var(--gd)"':''}>${w.r}</span>
+      <div class="in2"><div class="nm">${w.n} ${m?'<span class="b gd">条件が合います</span>':''}</div>
+      <div class="mt">${w.c}／${w.w}<br>紹介元：${w.src}　入居希望：${w.when}</div></div></div>`;
+  }).join('');
+}
+renderWait(null);
+
+document.querySelectorAll('.rm').forEach(r=>{
+  r.onclick = () => {
+    document.querySelectorAll('.rm').forEach(x=>x.classList.remove('sel'));
+    r.classList.add('sel');
+    const n = r.dataset.n, s = r.dataset.s, w = r.dataset.w, f = r.dataset.f;
+    const floor = parseInt(f);
+    const box = el('rmInfo');
+    if (s === 'in'){
+      box.className = 'note';
+      box.innerHTML = `<b>${n}号室（${f}）</b>　${w} 様がご入居中です。退去のご予定はありません。`;
+      renderWait(null);
+    } else if (s === 'soon'){
+      box.className = 'note w';
+      box.innerHTML = `<b>${n}号室（${f}）</b>　${w}。<br>
+        <b>いま動けば、空白期間をゼロにできます。</b>右の待機リストで、この階を希望されている方が緑になりました。
+        退去日の2週間前に紹介元への連絡が自動で予約されます。`;
+      renderWait(floor);
+    } else {
+      box.className = 'note g';
+      box.innerHTML = `<b>${n}号室（${f}）は現在 空室です。</b>
+        1日あたり約4,400円（月額13.2万円換算）の機会損失が発生しています。<br>
+        右の待機リストで条件の合う方が緑になりました。<b>上から順にご連絡すれば、最短でその日から埋まります。</b>`;
+      renderWait(floor);
+    }
+  };
+});
+
+el('send').onclick = () => {
+  el('send').disabled = true;
+  el('sendmsg').innerHTML = '<span class="spin"></span> 送信中…';
+  setTimeout(()=>{
+    el('sendmsg').innerHTML = '✓ 8件の紹介元へ、最新の空室状況をお送りしました（デモのため実際には送信していません）';
+    el('send').disabled = false;
+  }, 1300);
+};
+</script>
+</body>
+</html>
